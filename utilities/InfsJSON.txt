@@ -1,0 +1,108 @@
+﻿Modelo de objeto Categoria
+{
+	"nome":"Cama mesa e banho"
+}
+
+=======================Modelo de inserção do cliente==============================
+{
+	
+	"nome": "João da Silva",
+	"email": "joao@gmail.com",
+	"cpfOuCnpj": "034656465000122",
+	"tipoCliente": 1,
+	"telefone1": "998765656",
+	"telefone2": "32165498",
+	"logradouro": "Rua California",
+	"numero": "181",
+	"complemento": "apto 502",
+	"cep": "38402852",
+	"cidadeId": 2
+
+}
+
+==================================Objeto pedido para inserir=======================
+{
+	"cliente" : {"id" : 1},
+	"enderecoDeEntrega" : {"id" : 1},
+	"pagamento" : {
+		"numeroDeParcelas" : 10,
+		"@type": "pagamentoComCartao"
+	},
+	"itens" : [
+	    {
+		"quantidade" : 2,
+		"produto" : {"id" : 3}
+	    },
+	    {
+		"quantidade" : 1,
+		"produto" : {"id" : 1}
+	    }
+	]
+}
+
+================================JSON FERIADO====================================
+{
+    "dataferiado": "2020-10-05",
+    "estado": "MG",
+    "replicar": 0,
+    "descricao": "Feriado",
+    "cidade": "Uberlândia"
+}
+
+Criar tabela feriado
+
+CREATE TABLE TFERIADO (
+    CODFERIADO INTEGER NOT NULL,
+    "DESCRICAO    " VARCHAR(50) CHARACTER SET NONE COLLATE NONE,
+    "CIDADE       " VARCHAR(30) CHARACTER SET NONE COLLATE NONE,
+    "ESTADO       " VARCHAR(20) CHARACTER SET NONE COLLATE NONE,
+    "DATAFERIADO  " DATE,
+    "REPLICAR     " SMALLINT);
+===================================================================================
+SELECT PRODUTO.*
+FROM PRODUTO
+INNER JOIN CATEGORIA cat
+ON PRODUTO.CATEGORIA_ID = cat.ID
+WHERE
+cat.NOME = 'Informática'
+
+SELECT obj FROM Produto obj WHERE obj.categoria.nome = 'Informática'
+
+=====================================================================================
+Recuperar todos produtos cujo nome contenha um dado string, e que pertença a pelo menos uma
+categoria dentre as categorias de uma data lista
+
+
+===========================Apagar em cascata=======================================
+@OneToMany(mappedBy="cliente", cascade = CascadeType.ALL)
+===========================Paginação===============================================
+http://localhost:8081/categorias/page?linesPerPage=3 est� ordenando por nome
+http://localhost:8081/categorias/page?linesPerPage=3&page=1 
+http://localhost:8081/categorias/page?linesPerPage=3&page=1&direction=DESC
+
+=============================URL de Produtos/Categorias======================================================
+http://localhost:8081/produtos?&nome=t&categorias=1,4
+
+======================Pacotes Bean validation =====================================
+https://docs.oracle.com/javaee/7/tutorial/bean-validation001.htm Java EE 7
+
+Regra de negócio, eu não posso excluir um cliente que possua pedidos,
+se não tiver pedidos eu posso excluir o endereço e telefones
+
+
+//Nessa operação de insert vamos inserir o cliente e os endereços dele, 
+//e para garantir que essa inserção ocorra de forma transacional é recomendável a anotação @transational
+
+======================Comandos NG Angular=====================================
+Criar classe = ng g class /Xexpress/classe/feriado
+Criar pagina = ng generate component feriados
+Instalar pacote = npm install --save ngb-modal@1.0.5cls
+Desinstalar pacote = npm uninstall ngb-modal@1.0.5
+
+executar = ng serve
+
+
+
+
+
+
