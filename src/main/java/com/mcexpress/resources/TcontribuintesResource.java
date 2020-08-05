@@ -171,7 +171,7 @@ public class TcontribuintesResource {
 	//========================Inserir novo contribuinte =================
 	@CrossOrigin
 	@RequestMapping(method = RequestMethod.POST) //A anotação @Valid indica que o metodo irá usar o BeanValidation na Trecibos DTO
-	public ResponseEntity<Void> inser(@RequestBody Tcontribuintes obj){ //Para o objeto ser construido a partir dos dados JSON que eu enviar é preciso a anotação antes da variável @RequestBody 
+	public ResponseEntity<Void> insert(@RequestBody Tcontribuintes obj){ //Para o objeto ser construido a partir dos dados JSON que eu enviar é preciso a anotação antes da variável @RequestBody 
 		
 		obj = service.insert(obj);
 		
