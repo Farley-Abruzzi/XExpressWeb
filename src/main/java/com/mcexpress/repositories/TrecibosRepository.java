@@ -212,6 +212,16 @@ public interface TrecibosRepository extends JpaRepository<Trecibos, Integer>  {
 	Page<Trecibos> buscarRecibosContrib(
 			@Param("cod") Integer cod, @Param("dtAtual") Date dtAtual, Pageable pageRequest);
 	
+	
+	@Query("SELECT COUNT(obj.nrorecibo), SUM(obj.valorgerado) FROM Trecibos obj "
+			+  "WHERE obj.codmensageiro =:cod "
+			+  "AND obj.statusrec = 'B' "
+			+  "AND obj.impresso = 'S' "
+			+  "AND obj.dtbaixa =:dtFech")
+		List<String> findByDeposito(
+				@Param("cod") Integer cod,
+				@Param("dtFech") Date dtFech);
+	
 			
 	
 	

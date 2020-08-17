@@ -24,16 +24,26 @@ public class Tnewdepositos implements Serializable {
 	private Double VALORDEPOSITO;
 	private String ENTIDADE;
 	private Integer CODUSUARIO;
+	private Integer CODMENSAGEIRO;
+	private Double TOTALARRECADADO;
+	private Integer QTDRECIBOS;
+	private Double VALORDESPESA;
+	private String DESCRICAODESPESA;
+	
 	
 	@ManyToOne
 	@JoinColumn(name="CODUSUARIO", insertable = false, updatable = false)
 	private Tusuarios USUARIO;
 	
+	@ManyToOne
+	@JoinColumn(name="CODMENSAGEIRO", insertable = false, updatable = false)
+	private Tfuncionarios MENSAGEIRO;
+	
 	public Tnewdepositos() {
 	}
 
 	public Tnewdepositos(Integer nRODEPOSITO, Date dTFECHAMENTO, Integer cODVALIDACAO, Double vALORDEPOSITO,
-			String eNTIDADE, Integer cODUSUARIO) {
+			String eNTIDADE, Integer cODUSUARIO, Integer cODMENSAGEIRO, Double tOTALARRECADADO, Integer qTDRECIBOS, Double vALORDESPESA, String dESCRICAODESPESA) {
 		super();
 		NRODEPOSITO = nRODEPOSITO;
 		DTFECHAMENTO = dTFECHAMENTO;
@@ -41,6 +51,11 @@ public class Tnewdepositos implements Serializable {
 		VALORDEPOSITO = vALORDEPOSITO;
 		ENTIDADE = eNTIDADE;
 		CODUSUARIO = cODUSUARIO;
+		CODMENSAGEIRO = cODMENSAGEIRO;
+		TOTALARRECADADO = tOTALARRECADADO;
+		QTDRECIBOS = qTDRECIBOS;
+		VALORDESPESA = vALORDESPESA;
+		DESCRICAODESPESA = dESCRICAODESPESA;
 	}
 
 	public Integer getNRODEPOSITO() {
@@ -66,6 +81,26 @@ public class Tnewdepositos implements Serializable {
 	public Integer getCODUSUARIO() {
 		return CODUSUARIO;
 	}
+	
+	public Integer getCODMENSAGEIRO() {
+		return CODMENSAGEIRO;
+	}
+	
+	public Double getTOTALARRECADADO() {
+		return TOTALARRECADADO;
+	}
+	
+	public Integer getQTDRECIBOS() {
+		return QTDRECIBOS;
+	}
+	
+	public Double getVALORDESPESA() {
+		return VALORDESPESA;
+	}
+	
+	public String getDESCRICAODESPESA() {
+		return DESCRICAODESPESA;
+	}
 
 	public void setNRODEPOSITO(Integer nRODEPOSITO) {
 		NRODEPOSITO = nRODEPOSITO;
@@ -89,6 +124,26 @@ public class Tnewdepositos implements Serializable {
 	
 	public void setCODUSUARIO(Integer cODUSUARIO) {
 		CODUSUARIO = cODUSUARIO;
+	}
+	
+	public void setCODMENSAGEIRO(Integer cODMENSAGEIRO) {
+		CODMENSAGEIRO = cODMENSAGEIRO;
+	}
+	
+	public void setTOTALARRECADADO(Double tOTALARRECADADO) {
+		TOTALARRECADADO = tOTALARRECADADO;
+	}
+	
+	public void setQTDRECIBOS(Integer qTDRECIBOS) {
+		QTDRECIBOS = qTDRECIBOS;
+	}
+	
+	public void setVALORDESPESA(Double vALORDESPESA) {
+		VALORDESPESA = vALORDESPESA;
+	}
+	
+	public void setDESCRICAODESPESA(String dESCRICAODESPESA) {
+		DESCRICAODESPESA = dESCRICAODESPESA;
 	}
 
 	@Override

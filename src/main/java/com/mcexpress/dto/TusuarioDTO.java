@@ -129,9 +129,4 @@ public class TusuarioDTO implements Serializable {
 		OBSERVACOES = oBSERVACOES;
 	}
 	
-
-	
-	
-	
-	
 }

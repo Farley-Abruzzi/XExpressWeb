@@ -17,5 +17,5 @@ public interface TnewdepositosRepository extends JpaRepository<Tnewdepositos, In
 	//=================================Depositos código máximo de incremento no BD Firebird=============
 		@Query("SELECT MAX(obj.NRODEPOSITO) FROM Tnewdepositos obj ")
 				Integer findMax();
-
+		
 }
