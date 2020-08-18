@@ -36,32 +36,6 @@ public class TnewdepositosService {
 	}
 	
 	
-//	public List<TdepositosDTO> validarDeposito(Integer codmensageiro, Date dtfechamento) {
-//		
-//			
-//		List<String> listDeposito = repo.findByDeposito(codmensageiro, dtfechamento);
-//		
-//		String var;
-//		String[] vetLista = new String[2];
-//		
-//		List<TdepositosDTO> listDepositoDTO = new ArrayList<>();
-//		
-//		for (int i = 0; i < listDeposito.size(); i++) {
-//			
-//			TdepositosDTO depositoDTO = new TdepositosDTO();
-//			
-//			var = listDeposito.get(i);
-//			vetLista = var.split(",");
-//			
-//			depositoDTO.setTotalarrecadado(Double.parseDouble(vetLista[0]));
-//			depositoDTO.setQtdrecibos(Integer.parseInt(vetLista[1]));
-//			
-//			listDepositoDTO.add(depositoDTO);
-//		}
-//		
-//		return listDepositoDTO;
-//	}
-	
 	public Tnewdepositos insert(Tnewdepositos obj) {
 		
 		List<String> listaDeposito = repoRecibos.findByDeposito(obj.getCODMENSAGEIRO(), obj.getDTFECHAMENTO());
@@ -85,7 +59,7 @@ public class TnewdepositosService {
 			obj.setNRODEPOSITO(nrodeposito);
 			obj.setQTDRECIBOS(depositoDTO.getQtdrecibos());
 			
-			System.out.println("\nTOTAL ARRECADADO OBJ WEB: " + obj.getTOTALARRECADADO() + "\nTotal arrecadado ObjDTO BD: " + depositoDTO.getValorDeposito());
+			System.out.println("\nTOTAL OBJ WEB: " + obj.getTOTALARRECADADO() + "\nTotal ObjDTO BD: " + depositoDTO.getValorDeposito());
 			return repo.save(obj);
 		} else {
 			System.out.println("\nVALOR DE DEPOSITO INCORRETO: "+ obj.getTOTALARRECADADO());
