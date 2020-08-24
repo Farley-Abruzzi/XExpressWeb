@@ -2,23 +2,43 @@ package com.mcexpress.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
 import com.mcexpress.domain.Tfuncionarios;
 
 public class TusuarioDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private Integer CODFUNC;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String NOME;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String ENDERECO;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String NUMERO;
 	private String COMPLEMENTO;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String BAIRRO;
 	private String CEP;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String CIDADE;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String UF;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String TELEFONE;
 	private String OBSERVACOES;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
+	private String SENHA;
 	
 	
 	

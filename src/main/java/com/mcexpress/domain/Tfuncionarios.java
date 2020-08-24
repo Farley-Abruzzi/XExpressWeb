@@ -42,6 +42,7 @@ public class Tfuncionarios implements Serializable {
 	@JoinColumn(name="CODTURNO")
 	private Tturnos TURNO;
 	
+	
 	public Tfuncionarios() {
 	}
 
