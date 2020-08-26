@@ -21,26 +21,26 @@ import com.mcexpress.domain.enums.Perfil;
 
 @Entity
 public class Tusuarios implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer CODUSUARIO;
-	private String LOGIN;
+	private String login;
 	@JsonIgnore
 	private String SENHA;
-	private Date DTULTALTERACAO;
-	private Integer CODAGENTE;
-
-	@JsonIgnore
-	private String SENHAJAVA;
-
+	private Integer CODGRUPO;
+	
 	@OneToOne
 	@JoinColumn(name = "CODFUNC")
 	private Tfuncionarios FUNCIONARIO;
+	
+	private Date DTULTALTERACAO;
+	private Integer CODAGENTE;
+	@JsonIgnore
+	private String SENHAJAVA;
+	private String email;
 
-	private Integer CODGRUPO;
 
 	@OneToOne
 	@JoinColumn(name = "CODGRUPO", insertable = false, updatable = false)
@@ -54,17 +54,18 @@ public class Tusuarios implements Serializable {
 		addPerfil(Perfil.USUARIO);
 	}
 
-	public Tusuarios(Integer cODUSUARIO, String lOGIN, String sENHA, Date dTULTALTERACAO, Integer cODAGENTE,
-			String sENHAJAVA, Tfuncionarios fUNCIONARIO, Integer cODGRUPO, Tgrupos gRUPO) {
+	public Tusuarios(Integer cODUSUARIO, String lOGIN, String sENHA, Integer cODGRUPO, Tgrupos gRUPO, Tfuncionarios fUNCIONARIO, 
+			Date dTULTALTERACAO, Integer cODAGENTE, String sENHAJAVA, String eMAIL) {
 		super();
 		CODUSUARIO = cODUSUARIO;
-		LOGIN = lOGIN;
+		login = lOGIN;
 		SENHA = sENHA;
+		CODGRUPO = cODGRUPO;
+		FUNCIONARIO = fUNCIONARIO;
 		DTULTALTERACAO = dTULTALTERACAO;
 		CODAGENTE = cODAGENTE;
 		SENHAJAVA = sENHAJAVA;
-		FUNCIONARIO = fUNCIONARIO;
-		CODGRUPO = cODGRUPO;
+		email = eMAIL;
 
 		this.GRUPO = gRUPO;
 	}
@@ -73,8 +74,8 @@ public class Tusuarios implements Serializable {
 		return CODUSUARIO;
 	}
 
-	public String getLOGIN() {
-		return LOGIN;
+	public String getLogin() {
+		return login;
 	}
 
 	public String getSENHA() {
@@ -87,6 +88,10 @@ public class Tusuarios implements Serializable {
 
 	public Integer getCODAGENTE() {
 		return CODAGENTE;
+	}
+	
+	public String getEmail() {
+		return email;
 	}
 
 	public String getSENHAJAVA() {
@@ -117,8 +122,8 @@ public class Tusuarios implements Serializable {
 		CODUSUARIO = cODUSUARIO;
 	}
 
-	public void setLOGIN(String lOGIN) {
-		LOGIN = lOGIN;
+	public void setLOGIN(String login) {
+		this.login = login;
 	}
 
 	public void setSENHA(String sENHA) {
@@ -131,6 +136,10 @@ public class Tusuarios implements Serializable {
 
 	public void setCODAGENTE(Integer cODAGENTE) {
 		CODAGENTE = cODAGENTE;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public void setSENHAJAVA(String sENHAJAVA) {
