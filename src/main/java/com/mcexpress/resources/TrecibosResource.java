@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,7 +48,7 @@ public class TrecibosResource {
 	private TfuncionariosService serviceFunc;
 
 	// =================================Receibo por numero do recibo
-
+	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'OPERADORA')")
 	@CrossOrigin
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Trecibos> find(@PathVariable Integer id) {
@@ -59,7 +60,7 @@ public class TrecibosResource {
 	}
 
 	// =================================Recibos por id do mensageiro com paginação
-
+	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'OPERADORA')")
 	@CrossOrigin
 	@RequestMapping(value = "/mensageiro", method = RequestMethod.GET)
 	public ResponseEntity<Page<TrecibosDTO>> findAllByMensRecibo(
@@ -85,6 +86,7 @@ public class TrecibosResource {
 	}
 
 	// ==================================Recibos por id do mensageiro entre datas
+	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'OPERADORA')")
 	@CrossOrigin
 	@RequestMapping(value = "/recibomensageiro", method = RequestMethod.GET)
 	public ResponseEntity<List<TrecibosDTO>> findByMensageiroRecibo(
@@ -107,6 +109,7 @@ public class TrecibosResource {
 	
 
 	// ====== Recibos por id do mensageiro entre datas (recebido) com paginação =================
+	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'OPERADORA')")
 	@CrossOrigin
 	@RequestMapping(value = "/findrecibosrecebidos", method = RequestMethod.GET)
 	public ResponseEntity<Page<TrecibosDTO5>> findRecibosRecebidos(
@@ -127,6 +130,7 @@ public class TrecibosResource {
 	}
 
 	// ========	Recibos por id do mensageiro entre datas (Em aberto) com paginação  =================
+	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'OPERADORA')")
 	@CrossOrigin
 	@RequestMapping(value = "/findrecibosaberto", method = RequestMethod.GET)
 	public ResponseEntity<Page<TrecibosDTO5>> findRecibosAbertos(
@@ -147,7 +151,7 @@ public class TrecibosResource {
 	}
 
 	// =======Recibos por id do mensageiro entre datas - tabela do app mobile =================
-
+	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'MENSAGEIRO')")
 	@CrossOrigin
 	@RequestMapping(value = "/listarecibosapp", method = RequestMethod.GET)
 	public ResponseEntity<List<TrecibosDTO5>> findRecibosApp(
@@ -163,7 +167,7 @@ public class TrecibosResource {
 	}
 	
 	// =======Recibos por id do mensageiro entre datas e seleção do status - Lista Recibos por mensageiro WEB ==================
-	
+	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'OPERADORA')")
 	@CrossOrigin
 	@RequestMapping(value = "/listarecibosweb", method = RequestMethod.GET)
 	public ResponseEntity<List<TrecibosPorMensageiroDTO>> findRecibosWeb(
@@ -182,7 +186,7 @@ public class TrecibosResource {
 	}
 	
 	// ========Recibos reimpressos entre datas *** ==============================================
-	
+	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'OPERADORA')")
 	@CrossOrigin
 	@RequestMapping(value = "/listarecibosreimpressos", method = RequestMethod.GET)
 	public ResponseEntity<List<TrecibosReimpressosDTO>> findRecibosReimpressos(
@@ -204,6 +208,7 @@ public class TrecibosResource {
 	
 	
 	// ======Recibos por numero do recibo com o objeto - TrecibosDTO5 para o app mobile =================
+	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'MENSAGEIRO')")
 	@CrossOrigin
 	@RequestMapping(value = "/app/{id}", method = RequestMethod.GET)
 	public ResponseEntity<TrecibosDTO5> findReciboApp(@PathVariable Integer id) {
@@ -216,7 +221,7 @@ public class TrecibosResource {
 	}
 
 	// ======= Atualiza recibos por id do mensageiro entre datas tabela do app mobile (Baixar) =================
-
+	@PreAuthorize("hasAnyRole('ADMIN', 'MENSAGEIRO')")
 	@CrossOrigin
 	@RequestMapping(value = "/updateRecibosapp", method = RequestMethod.PUT)
 	public ResponseEntity<Void> updateRecibosApp(@RequestParam(value = "cod", defaultValue = "6") Integer cod,
@@ -230,6 +235,7 @@ public class TrecibosResource {
 	}
 	
 	// ===== Lista recidos baixados entre datas *** ===========================
+	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'OPERADORA')")
 	@CrossOrigin
 	@RequestMapping(value = "/recebidomensageiro", method = RequestMethod.GET)
 	public ResponseEntity<List<TrecebidoMensageiroDTO>> findRecebidoMensageiro(
@@ -246,6 +252,7 @@ public class TrecibosResource {
 	
 
 	// ===== Lista de recibos entre datas a reprocessar =================
+	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR')")
 	@CrossOrigin
 	@RequestMapping(value = "/recibosreprocessar", method = RequestMethod.GET)
 	public ResponseEntity<List<TrecibosReprocessarDTO>> findRecibosReprocesssar(
@@ -260,6 +267,7 @@ public class TrecibosResource {
 	}
 
 	// ============= Resumo por id do mensageiro entre datas =====================
+	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'OPERADORA')")
 	@CrossOrigin
 	@RequestMapping(value = "/resumomensageiro", method = RequestMethod.GET)
 	public ResponseEntity<TresumoRecibosDTO> ResumoRecibosMensageiroData(
@@ -278,7 +286,7 @@ public class TrecibosResource {
 		// http://localhost:8081/recibos/resumomensageiro?cod=11&startDate=2018-01-01&endDate=2018-02-01
 	}
 	
-	
+	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'OPERADORA')")
 	@CrossOrigin
 	@RequestMapping(value = "/relatoriodiario", method = RequestMethod.GET)
 	public ResponseEntity<List<TrecibosRelatorioDiarioDTO>> findRelatorioDiario(
@@ -296,7 +304,7 @@ public class TrecibosResource {
 	
 
 	// ======== Resumo do mensageiro por cidade ==========================
-
+	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'OPERADORA')")
 	@CrossOrigin
 	@RequestMapping(value = "/mensageiroporcidade", method = RequestMethod.GET)
 	public ResponseEntity<List<TrecibosDTO3>> recibosMensageiroPorCidade(
@@ -312,6 +320,7 @@ public class TrecibosResource {
 	}
 
 	// ===== Resumo do mensageiro por cidade 1 - valido =================================
+	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'OPERADORA')")
 	@CrossOrigin
 	@RequestMapping(value = "/mensageiroporcidade1", method = RequestMethod.GET)
 	public ResponseEntity<List<TrecibosDTO4>> recibosMensageiroPorCidade1(
@@ -329,6 +338,7 @@ public class TrecibosResource {
 	}
 
 	// ============Recibos por id do contribuinte ativo ==== entre datas ===
+	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'OPERADORA')")
 	@CrossOrigin
 	@RequestMapping(value = "/recibocontribuinte", method = RequestMethod.GET)
 	public ResponseEntity<List<TrecibosDTO>> buscarRecibosContribData(
@@ -351,6 +361,7 @@ public class TrecibosResource {
 	}
 
 	// =================Recibos por id do contribuinte ativo TOP 25 ===
+	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'OPERADORA')")
 	@CrossOrigin
 	@RequestMapping(value = "/reciboscontrib", method = RequestMethod.GET)
 	public ResponseEntity<Page<TrecibosDTO>> buscarRecibosContrib(
@@ -455,6 +466,7 @@ public class TrecibosResource {
 	}
 	
 	//======================== Inserir novo recibo =================
+	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'MENSAGEIRO')")
 	@CrossOrigin
 	@RequestMapping(method = RequestMethod.POST) //A anotação @Valid indica que o metodo irá usar o BeanValidation na Trecibos DTO
 	public ResponseEntity<Void> insert(@RequestBody Trecibos obj) { //Para o objeto ser construido a partir dos dados JSON que eu enviar é preciso a anotação antes da variável @RequestBody

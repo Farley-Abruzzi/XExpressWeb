@@ -6,7 +6,7 @@ import javax.validation.constraints.NotEmpty;
 
 import com.mcexpress.domain.Tfuncionarios;
 
-public class TusuarioDTO implements Serializable {
+public class TfuncionarioDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -42,11 +42,11 @@ public class TusuarioDTO implements Serializable {
 	
 	
 	
-	public TusuarioDTO() {
+	public TfuncionarioDTO() {
 		
 	}
 	
-	public TusuarioDTO(Tfuncionarios tfuncionarios) {
+	public TfuncionarioDTO(Tfuncionarios tfuncionarios) {
 		this.CODFUNC = tfuncionarios.getCODFUNC();
 		this.NOME = tfuncionarios.getNOME();
 		this.ENDERECO = tfuncionarios.getENDERECO();

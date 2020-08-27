@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mcexpress.domain.Tfuncionarios;
 import com.mcexpress.dto.TfuncionariosDTO;
-import com.mcexpress.dto.TusuarioDTO;
+import com.mcexpress.dto.TfuncionarioDTO;
 import com.mcexpress.resources.utils.URL;
 import com.mcexpress.services.TfuncionariosService;
 
@@ -25,7 +26,7 @@ public class TfuncionariosResource {
 	@Autowired //Instanciar automaticamente
 	private TfuncionariosService service;
 
-
+	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR')")
 	@CrossOrigin
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<TfuncionariosDTO>> findFuncionarios() { 
@@ -39,6 +40,7 @@ public class TfuncionariosResource {
 		//consulta por Id Mensageiro
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR')")
 	@CrossOrigin
 	@RequestMapping(value = "/operadores", method=RequestMethod.GET)
 	public ResponseEntity<List<TfuncionariosDTO>> findOperador() {
@@ -53,16 +55,17 @@ public class TfuncionariosResource {
 	}
 	
 	// Busca usuário por nome completo ***
+	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR')")
 	@CrossOrigin
-	@RequestMapping(value = "/usuariopornome", method=RequestMethod.GET)
-	public ResponseEntity<TusuarioDTO> findUsuarioPorNome(
+	@RequestMapping(value = "/funcionariopornome", method=RequestMethod.GET)
+	public ResponseEntity<TfuncionarioDTO> findUsuarioPorNome(
 			@RequestParam(value = "nome", defaultValue = "")String nome) {
 		
 		String nomeDecoded = URL.decodeParam(nome);
 		nomeDecoded = nomeDecoded.toUpperCase();
 		
 		Tfuncionarios obj = service.findUsuarioPorNome(nomeDecoded);
-		TusuarioDTO objDto = new TusuarioDTO(obj);
+		TfuncionarioDTO objDto = new TfuncionarioDTO(obj);
 		
 		System.out.println("\n\nNome da pesquisa: " + nomeDecoded + "\n\n");
 		

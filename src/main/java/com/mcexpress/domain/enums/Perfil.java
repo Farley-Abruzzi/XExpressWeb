@@ -3,8 +3,8 @@ package com.mcexpress.domain.enums;
 public enum Perfil {
 	
 	ADMIN(1, "ROLE_ADMIN"),
-	USUARIO(2, "ROLE_USUARIO"),
-	OPERADOR(3, "ROLE_OPERADOR"),
+	SUPERVISOR(2, "ROLE_SUPERVISOR"),
+	OPERADORA(3, "ROLE_OPERADORA"),
 	MENSAGEIRO(4, "ROLE_MENSAGEIRO");
 	
 	private int cod;

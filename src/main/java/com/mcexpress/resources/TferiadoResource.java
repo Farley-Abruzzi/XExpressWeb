@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -68,6 +69,7 @@ public class TferiadoResource {
 
 	
 	//========================Inserir novo feriado=================
+	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR')")
 	@CrossOrigin
 	@RequestMapping(method = RequestMethod.POST) //A anotação @Valid indica que o metodo irá usar o BeanValidation na Trecibos DTO
 	public ResponseEntity<Void> insert(@Valid @RequestBody Tferiado obj){ //Para o objeto ser construido a partir dos dados JSON que eu enviar é preciso a anotação antes da variável @RequestBody 
@@ -95,6 +97,7 @@ public class TferiadoResource {
 	}
 		
 	//========================Atualizar novo feriado=================
+	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR')")
 	@CrossOrigin
 	@RequestMapping(value="/{id}" , method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@RequestBody Tferiado obj, @PathVariable Integer id){
@@ -114,6 +117,7 @@ public class TferiadoResource {
 	}
 	
 	//========================Excluir feriado=================
+	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR')")
 	@CrossOrigin
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) { 
