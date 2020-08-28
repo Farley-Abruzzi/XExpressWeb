@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +22,18 @@ public class TusuariosResource {
 		
 	@Autowired
 	private TusuariosService service;
+	
+	// =================================Usuario por id
+	//@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'OPERADORA')")
+	@CrossOrigin
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Tusuarios> findById(@PathVariable Integer id) {
+
+		Tusuarios obj = service.findById(id);
+		return ResponseEntity.ok().body(obj);
+		// Exemplo URL: http://localhost:8081/usuario/1
+		// consulta por numero do recibo
+	}
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@CrossOrigin

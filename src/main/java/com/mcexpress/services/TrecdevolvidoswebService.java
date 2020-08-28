@@ -22,7 +22,7 @@ public class TrecdevolvidoswebService {
 	@Autowired
 	private TrecdevolvidoswebRepository repo;
 
-	// =================================Feriado por id=============
+	// =================================Devolvido web por id=============
 	public Trecdevolvidosweb find(Integer id) {
 		Optional<Trecdevolvidosweb> obj = repo.findId(id);
 
@@ -31,7 +31,7 @@ public class TrecdevolvidoswebService {
 		// tipo do objeto que trouxe essa exceção
 	}
 
-	// =================================Feriado código máximo de incremento no BD
+	// =================================Recibo devolvido código máximo de incremento no BD
 	// Firebird=============
 
 	public Integer findMax() {
@@ -40,7 +40,7 @@ public class TrecdevolvidoswebService {
 		// tipo do objeto que trouxe essa exceção
 	}
 
-	// =================================Feriado com Paginação======
+	// =================================Recibo devolvido com Paginação======
 	public Page<Trecdevolvidosweb> findIdPage(Integer cod, Integer page, Integer linesPerPage, String orderBy,
 			String direction) {
 
@@ -49,7 +49,7 @@ public class TrecdevolvidoswebService {
 
 	}
 
-	// ==================================Feriado com Lista=========
+	// ==================================Recibo devolvido com Lista=========
 	public List<Trecdevolvidosweb> findIdList() {
 
 		List<Trecdevolvidosweb> list = repo.findIdList();
