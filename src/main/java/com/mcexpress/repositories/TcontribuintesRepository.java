@@ -56,7 +56,8 @@ public interface TcontribuintesRepository extends JpaRepository<Tcontribuintes, 
 			@Param("endereco") String endereco, Pageable pageRequest);
 	
 	
-	//=================================Feriado código máximo de incremento no BD Firebird=============
+	//=================================Contribuinte código máximo de incremento no BD Firebird=============
+	@Transactional(readOnly = true)
 	@Query("SELECT MAX(obj.codcontrib) FROM Tcontribuintes obj ")
 			Integer findMax();
 	

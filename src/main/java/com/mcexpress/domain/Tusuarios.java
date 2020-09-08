@@ -32,7 +32,7 @@ public class Tusuarios implements Serializable {
 	private Integer CODGRUPO;
 	
 	@OneToOne
-	@JoinColumn(name = "CODFUNC")
+	@JoinColumn(name = "CODFUNC",insertable = false, updatable = false)
 	private Tfuncionarios FUNCIONARIO;
 	
 	private Date DTULTALTERACAO;
@@ -40,6 +40,8 @@ public class Tusuarios implements Serializable {
 	@JsonIgnore
 	private String SENHAJAVA;
 	private String email;
+	private Integer CODFUNC;
+	private Integer CODMENSAGEIRO;
 
 
 	@OneToOne
@@ -51,11 +53,11 @@ public class Tusuarios implements Serializable {
 	private Set<Integer> perfis = new HashSet<>();
 
 	public Tusuarios() {
-		addPerfil(Perfil.OPERADORA);
+		addPerfil(Perfil.MENSAGEIRO);
 	}
 
 	public Tusuarios(Integer cODUSUARIO, String lOGIN, String sENHA, Integer cODGRUPO, Tgrupos gRUPO, Tfuncionarios fUNCIONARIO, 
-			Date dTULTALTERACAO, Integer cODAGENTE, String sENHAJAVA, String eMAIL) {
+			Date dTULTALTERACAO, Integer cODAGENTE, String sENHAJAVA, String eMAIL, Integer cODFUNC, Integer cODMENSAGEIRO) {
 		super();
 		CODUSUARIO = cODUSUARIO;
 		login = lOGIN;
@@ -66,6 +68,7 @@ public class Tusuarios implements Serializable {
 		CODAGENTE = cODAGENTE;
 		SENHAJAVA = sENHAJAVA;
 		email = eMAIL;
+		CODFUNC = cODFUNC;
 
 		this.GRUPO = gRUPO;
 	}
@@ -117,6 +120,14 @@ public class Tusuarios implements Serializable {
 	public Tgrupos getGRUPO() {
 		return GRUPO;
 	}
+	
+	public Integer getCODFUNC() {
+		return CODFUNC;
+	}
+	
+	public Integer getCODMENSAGEIRO() {
+		return CODMENSAGEIRO;
+	}
 
 	public void setCODUSUARIO(Integer cODUSUARIO) {
 		CODUSUARIO = cODUSUARIO;
@@ -157,6 +168,14 @@ public class Tusuarios implements Serializable {
 	public void setGRUPO(Tgrupos gRUPO) {
 		GRUPO = gRUPO;
 	}
+	
+	public void setCODFUNC(Integer cODFUNC) {
+		CODFUNC = cODFUNC;
+	}
+
+	public void setCODMENSAGEIRO(Integer cODMENSAGEIRO) {
+		CODMENSAGEIRO = cODMENSAGEIRO;
+	}
 
 	@Override
 	public int hashCode() {
@@ -182,5 +201,6 @@ public class Tusuarios implements Serializable {
 			return false;
 		return true;
 	}
+
 
 }

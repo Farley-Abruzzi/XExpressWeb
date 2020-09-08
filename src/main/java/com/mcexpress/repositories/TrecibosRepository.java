@@ -20,6 +20,7 @@ import com.mcexpress.domain.Trecibos;
 @Repository
 public interface TrecibosRepository extends JpaRepository<Trecibos, Integer>  {
 	
+	@Transactional(readOnly = true)
 	@Query("SELECT obj FROM Trecibos obj "
 			+ "WHERE obj.nrorecibo =:cod ")
 			Optional<Trecibos> findId(
@@ -79,6 +80,14 @@ public interface TrecibosRepository extends JpaRepository<Trecibos, Integer>  {
 			@Param("cod") Integer cod,
 			@Param("startDate") Date startDate,
 			@Param("endDate") Date endDate);
+	
+	//Restrição de conteúdo: mensageiro só recupera seu recibos
+//	@Transactional(readOnly = true)
+//	@Query("SELECT obj FROM Trecibos obj "
+//			+ "WHERE obj.statusrec = 'G' "
+//			+ "AND obj.entregaweb IS NULL "
+//			+ "AND obj.dtcobranca BETWEEN :startDate AND :endDate ")
+//	List<Trecibos> findByTfuncionarios(Tfuncionarios funcionario);
 	
 	
 	//==================================Lista Recibos por mensageiro Web ***
@@ -212,7 +221,7 @@ public interface TrecibosRepository extends JpaRepository<Trecibos, Integer>  {
 	Page<Trecibos> buscarRecibosContrib(
 			@Param("cod") Integer cod, @Param("dtAtual") Date dtAtual, Pageable pageRequest);
 	
-	
+	@Transactional(readOnly = true)
 	@Query("SELECT COUNT(obj.nrorecibo), SUM(obj.valorgerado) FROM Trecibos obj "
 			+  "WHERE obj.codmensageiro =:cod "
 			+  "AND obj.statusrec = 'B' "

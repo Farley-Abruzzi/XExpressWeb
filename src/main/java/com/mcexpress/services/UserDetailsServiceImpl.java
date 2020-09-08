@@ -22,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		if (user == null) {
 			throw new UsernameNotFoundException(login);
 		}
-		return new UserSS(user.getCODUSUARIO(), user.getLogin(), user.getSENHAJAVA(), user.getPerfis());
+		return new UserSS(user.getCODMENSAGEIRO(), user.getLogin(), user.getSENHAJAVA(), user.getPerfis());
 	}
 
 }

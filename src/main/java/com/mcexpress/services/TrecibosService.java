@@ -23,6 +23,8 @@ import com.mcexpress.dto.TrecibosReprocessarDTO;
 import com.mcexpress.dto.TresumoRecibosDTO;
 import com.mcexpress.repositories.TfuncionariosRepository;
 import com.mcexpress.repositories.TrecibosRepository;
+import com.mcexpress.security.UserSS;
+import com.mcexpress.services.exceptions.AuthorizationException;
 import com.mcexpress.services.exceptions.DataIntegrityException;
 import com.mcexpress.services.exceptions.ObjectNotFountException;
 
@@ -83,8 +85,11 @@ public class TrecibosService {
 	
 	// ==================================Recibos por id do mensageiro entre datas ==== Tabela do App mobile
 	public List<Trecibos> findRecibosApp(Integer cod, Date startDate, Date endDate) {
-
-		List<Trecibos> list = repo.findRecibosApp(cod, startDate, endDate);
+		UserSS user = UserService.authenticated();
+		if (user == null) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		List<Trecibos> list = repo.findRecibosApp(user.getId(), startDate, endDate);
 		return list;
 	}
 	
@@ -418,6 +423,15 @@ public class TrecibosService {
 		return repo.findAll(pageRequest);
 		// agora retornei o repositorio passando o pagerequest como argumento
 	}
+	
+//	public List<Trecibos> findByFuncionario() {
+//		UserSS user = UserService.authenticated();
+//		if (user == null) {
+//			throw new AuthorizationException("Acesso negado");
+//		}
+//		Tfuncionarios funcionario = repoFunc.findOne(user.getId());
+//		return repo.findByTfuncionarios(funcionario);
+//	}
 
 	
 

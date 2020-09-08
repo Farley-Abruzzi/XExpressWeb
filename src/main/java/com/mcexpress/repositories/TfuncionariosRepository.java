@@ -43,6 +43,8 @@ public interface TfuncionariosRepository extends JpaRepository<Tfuncionarios, In
 	@Query("SELECT obj FROM Tfuncionarios obj "
 			+ "WHERE obj.NOME like %:nome% ") 
 		Tfuncionarios findUsuarioPorNome(@Param("nome") String nome);
+
+	
 }
 
 

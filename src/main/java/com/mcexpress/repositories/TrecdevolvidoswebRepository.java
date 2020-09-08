@@ -15,24 +15,26 @@ import com.mcexpress.domain.Trecdevolvidosweb;
 @Repository
 public interface TrecdevolvidoswebRepository extends JpaRepository<Trecdevolvidosweb, Integer>  {
 	
-	//=================================Feriado por id=============
+	//=================================Recibos devolvidos por id=============
+	@Transactional(readOnly = true)
 	@Query("SELECT obj FROM Trecdevolvidosweb obj "
 			+ "WHERE obj.nrorecibo =:cod ")
 			Optional<Trecdevolvidosweb> findId(
 			@Param("cod") Integer cod);
 	
-	//=================================Feriado código máximo de incremento no BD Firebird=============
+	//=================================Recibos devolvidos código máximo de incremento no BD Firebird=============
+	@Transactional(readOnly = true)
 	@Query("SELECT MAX(obj.nrorecibo) FROM Trecdevolvidosweb obj ")
 			Integer findMax();
 		
-	//=================================Feriado com Paginação======
+	//=================================Recibos devolvidos com Paginação======
 	@Transactional(readOnly = true)
 	@Query("SELECT obj FROM Trecdevolvidosweb obj "
 			+ "WHERE obj.nrorecibo =:cod ")
 			Page<Trecdevolvidosweb> findIdPage(
 			@Param("cod") Integer cod, Pageable pageRequest);
 	
-	//==================================Feriado com Lista=========
+	//==================================Recibos devolvidos com Lista=========
 	@Transactional(readOnly = true)
 	@Query("SELECT obj FROM Trecdevolvidosweb obj "
 			+ "ORDER BY obj.nrorecibo ")

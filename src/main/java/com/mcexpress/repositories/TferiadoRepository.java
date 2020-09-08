@@ -16,12 +16,14 @@ import com.mcexpress.domain.Tferiado;
 public interface TferiadoRepository extends JpaRepository<Tferiado, Integer>  {
 	
 	//=================================Feriado por id=============
+	@Transactional(readOnly = true)
 	@Query("SELECT obj FROM Tferiado obj "
 			+ "WHERE obj.CODFERIADO =:cod ")
 			Optional<Tferiado> findId(
 			@Param("cod") Integer cod);
 	
 	//=================================Feriado código máximo de incremento no BD Firebird=============
+	@Transactional(readOnly = true)
 	@Query("SELECT MAX(obj.CODFERIADO) FROM Tferiado obj ")
 			Integer findMax();
 		

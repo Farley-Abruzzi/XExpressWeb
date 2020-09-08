@@ -67,11 +67,16 @@ public class Trecibos implements Serializable {
 	private Date dtreagendamento;
 	
 	private Integer codcontrib;
+	private Integer codusuario;
 	
 	
 	@ManyToOne
 	@JoinColumn(name="codcontrib", insertable = false, updatable = false)
 	private Tcontribuintes tconbribuintes; 
+	
+	@ManyToOne
+	@JoinColumn(name="codusuario", insertable = false, updatable = false)
+	private Tusuarios tusuarios;
 	
 	public Trecibos(Integer nRORECIBO, String iMPRESSO, Date dTOPERACAO, String sTATUSREC, Date eNTREGA,
 			Integer fORMULARIO, Date dTCOBRANCA, Date dTRECEBIMENTO, Date dTBAIXA, String pARCELA, Integer vIA,
@@ -80,7 +85,7 @@ public class Trecibos implements Serializable {
 			Double vALORALTERADO, Double vALORNAOALTERADO, String eNTREGAWEB, Timestamp dTVALORALTERADOBAIXA,
 			Double vALORBAKP, String vALORHORABKP, Date vALORDATABKP, Date dATAQLD, Integer nAORECEBIDO,
 			Integer nROSORTE, String mOTIVODEVOL, Date dTREMARC,Double vALORREMARCADO, Integer cODOPERADOR, Integer cODMENSAGEIRO,
-			Integer cODCATEGORIA, String rEAGENDADO, Date dTREAGENDAMENTO, Integer cODCONTRIB, Tcontribuintes tconbribuintes) {
+			Integer cODCATEGORIA, String rEAGENDADO, Date dTREAGENDAMENTO, Integer cODCONTRIB, Tcontribuintes tconbribuintes, Tusuarios tusuarios) {
 		super();
 		
 		nrorecibo=nRORECIBO;
@@ -123,6 +128,7 @@ public class Trecibos implements Serializable {
 		codcontrib = cODCONTRIB;
 		
 		this.tconbribuintes=tconbribuintes;
+		this.tusuarios=tusuarios;
 	}
 	
 	public Trecibos() {
@@ -300,6 +306,10 @@ public class Trecibos implements Serializable {
 
 	public Integer getCodcategoria() {
 		return codcategoria;
+	}
+	
+	public Integer getCodusuario() {
+		return codusuario;
 	}
 
 
@@ -503,6 +513,10 @@ public class Trecibos implements Serializable {
 	
 	public void setCodcontrib(Integer codcontrib) {
 		this.codcontrib = codcontrib;
+	}
+
+	public void setCodusuario(Integer codusuario) {
+		this.codusuario = codusuario;
 	}
 
 

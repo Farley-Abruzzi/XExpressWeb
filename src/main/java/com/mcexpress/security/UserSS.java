@@ -31,7 +31,6 @@ public class UserSS implements UserDetails {
 	}
 
 
-
 	public Integer getId() {
 		return id;
 	}

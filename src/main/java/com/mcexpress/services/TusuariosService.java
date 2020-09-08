@@ -50,16 +50,14 @@ public class TusuariosService {
 	}
 
 	public Tusuarios insert(Tusuarios obj) {
-
 		// tratar exceção caso banco for vazio
 		try {
 			Integer codUsuario = findMax() + 1;
-			// apontar proximo id do feriado
+			// apontar proximo id do usuario
 			obj.setCODUSUARIO(codUsuario);
-
 			String senha = pe.encode(obj.getSENHAJAVA());
 			obj.setSENHAJAVA(senha);
-
+			
 			return repo.save(obj);
 		} catch (Exception e) {
 			// apontar id inicial do banco

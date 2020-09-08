@@ -151,7 +151,7 @@ public class TrecibosResource {
 	}
 
 	// =======Recibos por id do mensageiro entre datas - tabela do app mobile =================
-	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'MENSAGEIRO')")
+	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'MENSAGEIRO', 'OPERADORA')")
 	@CrossOrigin
 	@RequestMapping(value = "/listarecibosapp", method = RequestMethod.GET)
 	public ResponseEntity<List<TrecibosDTO5>> findRecibosApp(
@@ -165,6 +165,17 @@ public class TrecibosResource {
 		return ResponseEntity.ok().body(listDto);
 		// http://192.168.0.243:8081/recibos/listarecibosapp?cod=315&startDate=2019-07-01&endDate=2019-07-31
 	}
+	
+//	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'MENSAGEIRO')")
+//	@CrossOrigin
+//	@RequestMapping(method = RequestMethod.GET)
+//	public ResponseEntity<List<Trecibos>> findRecibosApp() {
+//
+//		List<Trecibos> list = service.findByFuncionario();
+//
+//		return ResponseEntity.ok().body(list);
+//		// http://192.168.0.243:8081/recibos
+//	}
 	
 	// =======Recibos por id do mensageiro entre datas e seleção do status - Lista Recibos por mensageiro WEB ==================
 	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'OPERADORA')")
