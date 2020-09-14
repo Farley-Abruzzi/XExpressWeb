@@ -53,7 +53,7 @@ public class Tusuarios implements Serializable {
 	private Set<Integer> perfis = new HashSet<>();
 
 	public Tusuarios() {
-		addPerfil(Perfil.MENSAGEIRO);
+		addPerfil(Perfil.ADMIN);
 	}
 
 	public Tusuarios(Integer cODUSUARIO, String lOGIN, String sENHA, Integer cODGRUPO, Tgrupos gRUPO, Tfuncionarios fUNCIONARIO, 
@@ -202,5 +202,15 @@ public class Tusuarios implements Serializable {
 		return true;
 	}
 
-
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Tusuarios [login=");
+		builder.append(login);
+		builder.append(", SENHA=");
+		builder.append(SENHA);
+		builder.append("]");
+		return builder.toString();
+	}
+	
 }

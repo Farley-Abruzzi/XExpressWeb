@@ -8,6 +8,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.mcexpress.services.EmailService;
+import com.mcexpress.services.MockEmailService;
+
 @Configuration
 @Profile("dev") // esse arquivo é de configuração somente de teste, então todos os Beans que estiver nesta classe serão somente para teste.
 public class DevConfig {
@@ -29,6 +32,11 @@ public class DevConfig {
 		System.out.println("verdadeiro");
 		//dbService.instantiateTestDatabase(); //Ao invés de usar o arquivo principal instanciando os dados eu chamo a instanciação de teste ou dev que está numa classe de serviço.
 		return true;
+	}
+	
+	@Bean
+	public EmailService emailService() {
+		return new MockEmailService();
 	}
 	
 }

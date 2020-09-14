@@ -23,6 +23,9 @@ public class TusuariosService {
 
 	@Autowired
 	private TusuariosRepository repo;
+	
+	@Autowired
+	private EmailService emailService;
 
 	// ========================================Usuario por ID
 
@@ -57,7 +60,7 @@ public class TusuariosService {
 			obj.setCODUSUARIO(codUsuario);
 			String senha = pe.encode(obj.getSENHAJAVA());
 			obj.setSENHAJAVA(senha);
-			
+			emailService.sendOrderConfirmationEmail(obj);
 			return repo.save(obj);
 		} catch (Exception e) {
 			// apontar id inicial do banco
