@@ -205,11 +205,12 @@ public class Tusuarios implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Tusuarios [login=");
+		builder.append("Você foi cadastrado com sucesso no XEXPRESS!\n");
+		builder.append("\n LOGIN = ");
 		builder.append(login);
-		builder.append(", SENHA=");
+		builder.append("\n SENHA = ");
 		builder.append(SENHA);
-		builder.append("]");
+		builder.append("\n\n\t @glpv by Farley de Souza");
 		return builder.toString();
 	}
 	
