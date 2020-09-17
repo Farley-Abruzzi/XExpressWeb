@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:remove="all">Cadastro de Usuário</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div>
+		<h1>
+			Você foi cadastrado com sucesso no X-Express!
+		</h1>
+		<p>
+			Login: <span th:text="${usuario.login}"></span>
+		</p>
+		
+		<p>
+			Senha: <span th:text="${usuario.SENHA}"></span>
+		</p>
+		<p>
+			Instante: <span
+				th:text="${#dates.format(usuario.DTULTALTERACAO, 'dd/MM/yyyy HH:mm:ss')}"></span>
+		</p>
+		<br>
+		<br>
+		<p>
+			@GLPV By Developer <span>Farley de Souza</span>
+		</p>
+	</div>
+</body>
+</html>

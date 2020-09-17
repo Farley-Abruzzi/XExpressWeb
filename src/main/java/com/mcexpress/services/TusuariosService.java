@@ -1,5 +1,6 @@
 package com.mcexpress.services;
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,8 @@ public class TusuariosService {
 			obj.setCODUSUARIO(codUsuario);
 			String senha = pe.encode(obj.getSENHAJAVA());
 			obj.setSENHAJAVA(senha);
-			emailService.sendOrderConfirmationEmail(obj);
+			obj.setDTULTALTERACAO(new Date(System.currentTimeMillis()));
+			emailService.sendOrderConfirmationHtmlEmail(obj);
 			return repo.save(obj);
 		} catch (Exception e) {
 			// apontar id inicial do banco

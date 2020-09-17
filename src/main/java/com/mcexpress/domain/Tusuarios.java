@@ -205,7 +205,7 @@ public class Tusuarios implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Você foi cadastrado com sucesso no XEXPRESS!\n");
+		builder.append("Você foi cadastrado com sucesso no X-EXPRESS!\n");
 		builder.append("\n LOGIN = ");
 		builder.append(login);
 		builder.append("\n SENHA = ");
