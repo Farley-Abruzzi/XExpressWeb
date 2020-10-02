@@ -1,11 +1,13 @@
 package com.mcexpress.services;
 
+import java.net.URI;
 import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mcexpress.domain.Tusuarios;
 import com.mcexpress.domain.enums.Perfil;
@@ -27,6 +29,9 @@ public class TusuariosService {
 	
 	@Autowired
 	private EmailService emailService;
+	
+	@Autowired
+	private S3Service s3Service;
 
 	// ========================================Usuario por ID
 
@@ -69,6 +74,21 @@ public class TusuariosService {
 			obj.setCODUSUARIO(1);
 			return repo.save(obj);
 		}
+	}
+	
+	public URI uploadProfilePicture(MultipartFile multipartFile) {
+		UserSS user = UserService.authenticated();
+		if(user == null) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
+		URI uri = s3Service.uploadFile(multipartFile);
+		
+		Tusuarios mensageiro = repo.findOne(user.getId());
+		mensageiro.setImageUrl(uri.toString());
+		repo.save(mensageiro);
+		
+		return uri;
 	}
 
 }
