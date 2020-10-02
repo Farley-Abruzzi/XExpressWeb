@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.mcexpress.domain.Tnewdepositos;
@@ -36,6 +38,15 @@ public class TnewdepositosResource {
 		
 		return ResponseEntity.created(uri).build();
 		// http://localhost:8081/deposito		
+	}
+	
+	//@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'MENSAGEIRO')")
+	@CrossOrigin
+	@RequestMapping(value = "/picture", method = RequestMethod.POST) //A anotação @Valid indica que o metodo irá usar o BeanValidation na Trecibos DTO
+	public ResponseEntity<Void> uploadProfilePicture(@RequestParam(name="file") MultipartFile file) { //Para o objeto ser construido a partir dos dados JSON que eu enviar é preciso a anotação antes da variável @RequestBody
+		URI uri = service.uploadProfilePicture(file);
+		return ResponseEntity.created(uri).build();
+		// http://localhost:8081/deposito/picture
 	}
 	
 }

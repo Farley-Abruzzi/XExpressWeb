@@ -19,5 +19,8 @@ public interface TnewdepositosRepository extends JpaRepository<Tnewdepositos, In
 	@Transactional(readOnly = true)
 	@Query("SELECT MAX(obj.NRODEPOSITO) FROM Tnewdepositos obj ")
 				Integer findMax();
+	
+	@Transactional(readOnly = true)
+	Tnewdepositos findOne(Integer id);
 		
 }

@@ -29,6 +29,7 @@ public class Tnewdepositos implements Serializable {
 	private Integer QTDRECIBOS;
 	private Double VALORDESPESA;
 	private String DESCRICAODESPESA;
+	private String IMAGEURL;
 	
 	
 	@ManyToOne
@@ -43,7 +44,8 @@ public class Tnewdepositos implements Serializable {
 	}
 
 	public Tnewdepositos(Integer nRODEPOSITO, Date dTFECHAMENTO, Integer cODVALIDACAO, Double vALORDEPOSITO,
-			String eNTIDADE, Integer cODUSUARIO, Integer cODMENSAGEIRO, Double tOTALARRECADADO, Integer qTDRECIBOS, Double vALORDESPESA, String dESCRICAODESPESA) {
+			String eNTIDADE, Integer cODUSUARIO, Integer cODMENSAGEIRO, Double tOTALARRECADADO, Integer qTDRECIBOS,
+			Double vALORDESPESA, String dESCRICAODESPESA, String iMAGEURL) {
 		super();
 		NRODEPOSITO = nRODEPOSITO;
 		DTFECHAMENTO = dTFECHAMENTO;
@@ -56,6 +58,7 @@ public class Tnewdepositos implements Serializable {
 		QTDRECIBOS = qTDRECIBOS;
 		VALORDESPESA = vALORDESPESA;
 		DESCRICAODESPESA = dESCRICAODESPESA;
+		IMAGEURL = iMAGEURL;
 	}
 
 	public Integer getNRODEPOSITO() {
@@ -100,6 +103,10 @@ public class Tnewdepositos implements Serializable {
 	
 	public String getDESCRICAODESPESA() {
 		return DESCRICAODESPESA;
+	}
+	
+	public String getIMAGEURL() {
+		return IMAGEURL;
 	}
 
 	public void setNRODEPOSITO(Integer nRODEPOSITO) {
@@ -146,6 +153,11 @@ public class Tnewdepositos implements Serializable {
 		DESCRICAODESPESA = dESCRICAODESPESA;
 	}
 
+	public void setIMAGEURL(String iMAGEURL) {
+		IMAGEURL = iMAGEURL;
+	}
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -170,5 +182,5 @@ public class Tnewdepositos implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 }

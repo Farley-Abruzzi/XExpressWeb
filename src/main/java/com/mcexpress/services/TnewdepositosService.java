@@ -1,15 +1,19 @@
 package com.mcexpress.services;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mcexpress.domain.Tnewdepositos;
 import com.mcexpress.dto.TdepositoDTO;
 import com.mcexpress.repositories.TnewdepositosRepository;
 import com.mcexpress.repositories.TrecibosRepository;
+import com.mcexpress.security.UserSS;
+import com.mcexpress.services.exceptions.AuthorizationException;
 import com.mcexpress.services.exceptions.ObjectNotFountException;
 
 @Service
@@ -20,6 +24,9 @@ public class TnewdepositosService {
 	
 	@Autowired
 	private TrecibosRepository repoRecibos;
+	
+	@Autowired
+	private S3Service s3Service;
 	
 	
 	public Tnewdepositos find(Integer id) {
@@ -65,6 +72,21 @@ public class TnewdepositosService {
 			System.out.println("\nVALOR DE DEPOSITO INCORRETO: "+ obj.getTOTALARRECADADO());
 			return null;
 		}
+	}
+	
+	public URI uploadProfilePicture(MultipartFile multipartFile) {
+		UserSS user = UserService.authenticated();
+		if(user == null) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
+		URI uri = s3Service.uploadFile(multipartFile);
+		
+		Tnewdepositos obj = repo.findOne(user.getId());
+		obj.setIMAGEURL(uri.toString());
+		repo.save(obj);
+		
+		return uri;
 	}
 	
 }

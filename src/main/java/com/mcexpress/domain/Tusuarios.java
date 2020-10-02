@@ -42,7 +42,7 @@ public class Tusuarios implements Serializable {
 	private String email;
 	private Integer CODFUNC;
 	private Integer CODMENSAGEIRO;
-	private String imageUrl;
+	
 
 
 	@OneToOne
@@ -58,7 +58,7 @@ public class Tusuarios implements Serializable {
 	}
 
 	public Tusuarios(Integer cODUSUARIO, String lOGIN, String sENHA, Integer cODGRUPO, Tgrupos gRUPO, Tfuncionarios fUNCIONARIO, 
-			Date dTULTALTERACAO, Integer cODAGENTE, String sENHAJAVA, String eMAIL, Integer cODFUNC, Integer cODMENSAGEIRO, String imageUrl) {
+			Date dTULTALTERACAO, Integer cODAGENTE, String sENHAJAVA, String eMAIL, Integer cODFUNC, Integer cODMENSAGEIRO) {
 		super();
 		CODUSUARIO = cODUSUARIO;
 		login = lOGIN;
@@ -70,7 +70,6 @@ public class Tusuarios implements Serializable {
 		SENHAJAVA = sENHAJAVA;
 		email = eMAIL;
 		CODFUNC = cODFUNC;
-		this.imageUrl = imageUrl;
 
 		this.GRUPO = gRUPO;
 	}
@@ -179,13 +178,6 @@ public class Tusuarios implements Serializable {
 		CODMENSAGEIRO = cODMENSAGEIRO;
 	}
 	
-	public String getImageUrl() {
-		return imageUrl;
-	}
-
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
 
 	@Override
 	public int hashCode() {
