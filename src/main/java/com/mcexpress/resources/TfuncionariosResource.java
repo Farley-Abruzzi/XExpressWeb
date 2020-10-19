@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,7 +25,7 @@ public class TfuncionariosResource {
 	@Autowired //Instanciar automaticamente
 	private TfuncionariosService service;
 
-	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR')")
+	//@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR')")
 	@CrossOrigin
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<TfuncionariosDTO>> findFuncionarios() { 
@@ -40,7 +39,7 @@ public class TfuncionariosResource {
 		//consulta por Id Mensageiro
 	}
 	
-	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR')")
+	//@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR')")
 	@CrossOrigin
 	@RequestMapping(value = "/operadores", method=RequestMethod.GET)
 	public ResponseEntity<List<TfuncionariosDTO>> findOperador() {
@@ -55,7 +54,7 @@ public class TfuncionariosResource {
 	}
 	
 	// Busca usuário por nome completo ***
-	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR')")
+	//@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR')")
 	@CrossOrigin
 	@RequestMapping(value = "/funcionariopornome", method=RequestMethod.GET)
 	public ResponseEntity<TfuncionarioDTO> findUsuarioPorNome(

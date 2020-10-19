@@ -25,8 +25,5 @@ public interface TusuariosRepository extends JpaRepository<Tusuarios, Integer> {
 	
 	@Transactional(readOnly=true)
 	Tusuarios findByLogin(String login);
-	
-	@Transactional(readOnly=true)
-	Tusuarios findOne(Integer id);
 
 }

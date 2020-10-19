@@ -31,7 +31,7 @@ public class Trecibos implements Serializable {
 	//@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dtcobranca;
 	@JsonFormat(pattern = "dd/MM/yyyy")
-	private Date dtrecebimento;;
+	private Date dtrecebimento;
 	private Date dtbaixa;
 	private String parcela;
 	private Integer via;	

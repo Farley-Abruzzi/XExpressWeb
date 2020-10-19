@@ -99,7 +99,7 @@ public class TrecdevolvidoswebResource {
 	}
 		
 	//========================Atualizar recibo devolvido=================
-	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR')")
+	//@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR')")
 	@CrossOrigin
 	@RequestMapping(value="/{id}" , method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@RequestBody Trecdevolvidosweb obj, @PathVariable Integer id){
@@ -114,7 +114,7 @@ public class TrecdevolvidoswebResource {
 	}
 	
 	//========================Excluir recibo devolvido=================
-	@PreAuthorize("hasAnyRole('ADMIN')")
+	//@PreAuthorize("hasAnyRole('ADMIN')")
 	@CrossOrigin
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) { 

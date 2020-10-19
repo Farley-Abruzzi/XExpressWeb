@@ -39,8 +39,8 @@ public class Tusuarios implements Serializable {
 	private Integer CODAGENTE;
 	@JsonIgnore
 	private String SENHAJAVA;
-	private String email;
 	private Integer CODFUNC;
+	private String email;
 	private Integer CODMENSAGEIRO;
 	
 
@@ -212,7 +212,7 @@ public class Tusuarios implements Serializable {
 		builder.append(login);
 		builder.append("\n SENHA = ");
 		builder.append(SENHA);
-		builder.append("\n\n\t @glpv by Farley de Souza");
+		builder.append("\n\n\t @GLPV by Farley de Souza");
 		return builder.toString();
 	}
 	

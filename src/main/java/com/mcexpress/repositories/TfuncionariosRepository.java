@@ -22,7 +22,7 @@ public interface TfuncionariosRepository extends JpaRepository<Tfuncionarios, In
 			+ "AND obj.CODMENSAGEIROAMAIS IS NOT NULL "
 			+ "AND obj.CODFUNC NOT IN (709,746,755,822,764) "
 			+ "ORDER BY obj.NOME " )
-	List<Tfuncionarios> buscarFuncionarios(Boolean v);
+	List<Tfuncionarios> findFuncionarios(Boolean v);
 	
 	//755 cofrinho 755 guilherme martins de melo
 	//822 cofrinho 822 jean paulo
@@ -35,7 +35,7 @@ public interface TfuncionariosRepository extends JpaRepository<Tfuncionarios, In
 			+ "AND obj.CODCARGO = 1 "
 			+ "AND obj.CODFUNC NOT IN (709,746,755,822,764) "
 			+ "ORDER BY obj.NOME " )
-	List<Tfuncionarios> buscarOperador(Boolean v);
+	List<Tfuncionarios> findOperador(Boolean v);
 	
 	
 	// Usuario por nome

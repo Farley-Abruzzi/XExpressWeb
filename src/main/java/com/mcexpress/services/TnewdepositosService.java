@@ -1,5 +1,6 @@
 package com.mcexpress.services;
 
+
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -44,6 +45,10 @@ public class TnewdepositosService {
 	
 	
 	public Tnewdepositos insert(Tnewdepositos obj) {
+//		UserSS user = UserService.authenticated();
+//		if(user == null) {
+//			throw new AuthorizationException("Acesso negado");
+//		}
 		
 		List<String> listaDeposito = repoRecibos.findByDeposito(obj.getCODMENSAGEIRO(), obj.getDTFECHAMENTO());
 		
@@ -65,6 +70,7 @@ public class TnewdepositosService {
 			Integer nrodeposito = findMax()+1;
 			obj.setNRODEPOSITO(nrodeposito);
 			obj.setQTDRECIBOS(depositoDTO.getQtdrecibos());
+//			obj.setEmail(user.getUsername());
 			
 			System.out.println("\nTOTAL OBJ WEB: " + obj.getTOTALARRECADADO() + "\nTotal ObjDTO BD: " + depositoDTO.getValorDeposito());
 			return repo.save(obj);
@@ -82,7 +88,7 @@ public class TnewdepositosService {
 		
 		URI uri = s3Service.uploadFile(multipartFile);
 		
-		Tnewdepositos obj = repo.findOne(user.getId());
+		Tnewdepositos obj = repo.findByEmail(user.getUsername());
 		obj.setIMAGEURL(uri.toString());
 		repo.save(obj);
 		

@@ -12,7 +12,6 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Tnewdepositos implements Serializable {
-	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -30,6 +29,7 @@ public class Tnewdepositos implements Serializable {
 	private Double VALORDESPESA;
 	private String DESCRICAODESPESA;
 	private String IMAGEURL;
+	private String email;
 	
 	
 	@ManyToOne
@@ -45,7 +45,7 @@ public class Tnewdepositos implements Serializable {
 
 	public Tnewdepositos(Integer nRODEPOSITO, Date dTFECHAMENTO, Integer cODVALIDACAO, Double vALORDEPOSITO,
 			String eNTIDADE, Integer cODUSUARIO, Integer cODMENSAGEIRO, Double tOTALARRECADADO, Integer qTDRECIBOS,
-			Double vALORDESPESA, String dESCRICAODESPESA, String iMAGEURL) {
+			Double vALORDESPESA, String dESCRICAODESPESA, String iMAGEURL, String email) {
 		super();
 		NRODEPOSITO = nRODEPOSITO;
 		DTFECHAMENTO = dTFECHAMENTO;
@@ -59,6 +59,7 @@ public class Tnewdepositos implements Serializable {
 		VALORDESPESA = vALORDESPESA;
 		DESCRICAODESPESA = dESCRICAODESPESA;
 		IMAGEURL = iMAGEURL;
+		this.email = email;
 	}
 
 	public Integer getNRODEPOSITO() {
@@ -108,6 +109,10 @@ public class Tnewdepositos implements Serializable {
 	public String getIMAGEURL() {
 		return IMAGEURL;
 	}
+	
+	public String getEmail() {
+		return email;
+	}
 
 	public void setNRODEPOSITO(Integer nRODEPOSITO) {
 		NRODEPOSITO = nRODEPOSITO;
@@ -155,6 +160,10 @@ public class Tnewdepositos implements Serializable {
 
 	public void setIMAGEURL(String iMAGEURL) {
 		IMAGEURL = iMAGEURL;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 

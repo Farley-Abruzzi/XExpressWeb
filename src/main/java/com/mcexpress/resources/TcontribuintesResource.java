@@ -198,7 +198,7 @@ public class TcontribuintesResource {
 		// http://localhost:8081/contribuintes
 	}
 	
-	//========================Inserir novo feriado=================
+	//========================Atualizar contribuinte=================
 		
 	/*
 	@RequestMapping(value="/{id}" , method = RequestMethod.PUT)

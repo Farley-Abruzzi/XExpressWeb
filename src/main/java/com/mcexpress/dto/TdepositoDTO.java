@@ -18,6 +18,8 @@ public class TdepositoDTO implements Serializable {
 	private String periodo;
 	private Double valorDeposito;
 	private String entidade;
+	private String imageurl;
+	private String EMAIL;
 	
 	
 	public TdepositoDTO() {	
@@ -25,7 +27,7 @@ public class TdepositoDTO implements Serializable {
 	
 	public TdepositoDTO(Integer nrodeposito, Integer codmensageiro, Integer codvaliadcao, Integer codusuario,
 			Integer qtdrecibos, Double totalarrecadado, Date dtfechamento, String periodo, Double valorDeposito,
-			String entidade) {
+			String entidade, String imageurl, String EMAIL) {
 		super();
 		this.nrodeposito = nrodeposito;
 		this.codmensageiro = codmensageiro;
@@ -37,6 +39,8 @@ public class TdepositoDTO implements Serializable {
 		this.periodo = periodo;
 		this.valorDeposito = valorDeposito;
 		this.entidade = entidade;
+		this.imageurl = imageurl;
+		this.EMAIL = EMAIL;
 	}
 
 
@@ -139,6 +143,22 @@ public class TdepositoDTO implements Serializable {
 
 	public void setEntidade(String entidade) {
 		this.entidade = entidade;
+	}
+
+	public String getImageurl() {
+		return imageurl;
+	}
+
+	public void setImageurl(String imageurl) {
+		this.imageurl = imageurl;
+	}
+
+	public String getEMAIL() {
+		return EMAIL;
+	}
+
+	public void setEMAIL(String EMAIL) {
+		this.EMAIL = EMAIL;
 	}
 
 }

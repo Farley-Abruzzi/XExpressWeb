@@ -31,13 +31,13 @@ public class TfuncionariosService {
 
 	public List<Tfuncionarios> findFuncionarios() {
 
-		return repo.buscarFuncionarios(true);
+		return repo.findFuncionarios(true);
 
 	}
 	
 	public List<Tfuncionarios> findOperador() {
 		
-		return repo.buscarOperador(true);
+		return repo.findOperador(true);
 		
 	}
 	

@@ -10,17 +10,17 @@ import com.mcexpress.domain.Tnewdepositos;
 @Repository
 public interface TnewdepositosRepository extends JpaRepository<Tnewdepositos, Integer>  {
 	
-	/*@Query("SELECT obj FROM Tnewdepositos obj "
-			+ "WHERE obj.nrodeposito =:cod ")
-			Optional<Tnewdepositos> findId(
-			@Param("cod") Integer cod);*/
+//	@Query("SELECT obj FROM Tnewdepositos obj "
+//			+ "WHERE obj.codmensageiro =:cod ")
+//			Optional<Tnewdepositos> findId(
+//			@Param("cod") Integer cod);
 	
 	//=================================Depositos código máximo de incremento no BD Firebird=============
 	@Transactional(readOnly = true)
 	@Query("SELECT MAX(obj.NRODEPOSITO) FROM Tnewdepositos obj ")
 				Integer findMax();
+
+	Tnewdepositos findByEmail(String username);
+
 	
-	@Transactional(readOnly = true)
-	Tnewdepositos findOne(Integer id);
-		
 }

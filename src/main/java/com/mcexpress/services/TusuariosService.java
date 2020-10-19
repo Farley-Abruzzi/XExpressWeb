@@ -20,8 +20,6 @@ public class TusuariosService {
 	@Autowired
 	private BCryptPasswordEncoder pe;
 
-//	pe.encode(objDto.getSenha());
-
 	@Autowired
 	private TusuariosRepository repo;
 	
