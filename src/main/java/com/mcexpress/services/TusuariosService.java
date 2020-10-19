@@ -42,6 +42,23 @@ public class TusuariosService {
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Tusuarios.class.getName()));
 		// tipo do objeto que trouxe essa exceção
 	}
+	
+	public Tusuarios findByEmail(String email) {
+		UserSS user = UserService.authenticated();
+		if (user==null || !user.hasRole(Perfil.ADMIN) && !email.equals(user.getUsername())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
+		Tusuarios obj = repo.findByEmail(email);
+		// Agora o meu método de serviço lança uma exceção caso o id não exista, porém o rest tem
+		// que capturar a exceção e enviar um JSON apropriado para a resposta HTTP do meu recurso
+		if (obj == null) {
+			throw new ObjectNotFountException(
+					"Objeto não encontrado! Id: " + user.getId() + ", Tipo: " + Tusuarios.class.getName());
+			// tipo do objeto que trouxe essa exceção			
+		}
+		return obj;
+	}
 
 	// =================================Usuário código máximo de incremento no BD
 	// Firebird=============
