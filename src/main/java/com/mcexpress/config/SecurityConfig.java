@@ -37,10 +37,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private JWTUtil jwtUtil;
 	
-	private static final String[] PUBLIC_MATCHERS = { "/h2-console/**", "/login/**", "/auth/forgot**" };
+	private static final String[] PUBLIC_MATCHERS = { "/h2-console/**", "/login/**", "/auth/forgot**", "/recibos/**" };
 	
 	private static final String[] PUBLIC_MATCHERS_GET = { "/contribuintes/**", "/feriado/**", "/devolvido/**",
-			"/funcionarios/**", "/historicorecibo/**", "/recibos/**"  };
+			"/funcionarios/**", "/historicorecibo/**"};
 	
 	private static final String[] PUBLIC_MATCHERS_POST = { "/usuario/**", "/deposito", "/deposito/picture", "/devolvido/**", "/recibos/**"};
 
@@ -69,8 +69,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues();
+		configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "OPTIONS"));
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+		source.registerCorsConfiguration("/**", configuration);
 		return source;
 	}
 	
