@@ -156,9 +156,10 @@ public class TrecibosResource {
 	public ResponseEntity<List<TrecibosDTO5>> findRecibosApp(
 			@RequestParam(value = "cod", defaultValue = "6") Integer cod,
 			@RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
-			@RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
+			@RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
+			@RequestParam(value = "bairro", defaultValue = "") String bairro) {
 
-		List<Trecibos> list = service.findRecibosApp(cod, startDate, endDate);
+		List<Trecibos> list = service.findRecibosApp(cod, startDate, endDate, bairro);
 		List<TrecibosDTO5> listDto = list.stream().map(obj -> new TrecibosDTO5(obj)).collect(Collectors.toList());
 
 		return ResponseEntity.ok().body(listDto);

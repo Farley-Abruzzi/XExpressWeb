@@ -75,11 +75,13 @@ public interface TrecibosRepository extends JpaRepository<Trecibos, Integer>  {
 			+ "WHERE obj.codmensageiro =:cod "
 			+ "AND obj.statusrec = 'G' "
 			+ "AND obj.entregaweb IS NULL "
-			+ "AND obj.dtcobranca BETWEEN :startDate AND :endDate ")
+			+ "AND obj.dtcobranca BETWEEN :startDate AND :endDate "
+			+ "AND obj.tconbribuintes.BAIRROPRINCIPAL =:bairro ")
 		List<Trecibos> findRecibosApp( 
 			@Param("cod") Integer cod,
 			@Param("startDate") Date startDate,
-			@Param("endDate") Date endDate);
+			@Param("endDate") Date endDate,
+			@Param("bairro") String bairro);
 	
 	//Restrição de conteúdo: mensageiro só recupera seu recibos
 //	@Transactional(readOnly = true)

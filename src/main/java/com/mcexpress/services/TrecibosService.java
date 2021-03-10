@@ -84,12 +84,12 @@ public class TrecibosService {
 	}
 	
 	// ==================================Recibos por id do mensageiro entre datas ==== Tabela do App mobile
-	public List<Trecibos> findRecibosApp(Integer cod, Date startDate, Date endDate) {
+	public List<Trecibos> findRecibosApp(Integer cod, Date startDate, Date endDate, String bairro) {
 //		UserSS user = UserService.authenticated();
 //		if (user == null) {
 //			throw new AuthorizationException("Acesso negado");
 //		}
-		List<Trecibos> list = repo.findRecibosApp(cod, startDate, endDate);
+		List<Trecibos> list = repo.findRecibosApp(cod, startDate, endDate, bairro);
 		return list;
 	}
 	

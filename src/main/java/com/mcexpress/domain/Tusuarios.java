@@ -54,7 +54,7 @@ public class Tusuarios implements Serializable {
 	private Set<Integer> perfis = new HashSet<>();
 
 	public Tusuarios() {
-		addPerfil(Perfil.ADMIN);
+		addPerfil(Perfil.MENSAGEIRO);
 	}
 
 	public Tusuarios(Integer cODUSUARIO, String lOGIN, String sENHA, Integer cODGRUPO, Tgrupos gRUPO, Tfuncionarios fUNCIONARIO, 

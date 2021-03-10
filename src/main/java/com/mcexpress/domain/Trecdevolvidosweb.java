@@ -6,8 +6,6 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 @Entity
 public class Trecdevolvidosweb implements Serializable{
 
@@ -15,10 +13,10 @@ public class Trecdevolvidosweb implements Serializable{
 	
 	@Id
 	private Integer nrorecibo;
-	@JsonFormat(pattern = "dd/MM/yyyy")
+	//@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dtdevol;
 	private String horaoper;
-	@JsonFormat(pattern = "dd/MM/yyyy")
+	//@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dtoperacao;
 	private Integer codoperador;
 	private Integer codusuario;

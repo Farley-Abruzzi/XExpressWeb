@@ -16,6 +16,7 @@ public class TrecibosDTO5 implements Serializable{
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dtcobranca;
 	private String reagendado;
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date dtreagendamento;
 	private Double valorgerado;
 	private String statusrec;

@@ -45,12 +45,15 @@ public class TnewdepositosService {
 	
 	
 	public Tnewdepositos insert(Tnewdepositos obj) {
-//		UserSS user = UserService.authenticated();
-//		if(user == null) {
-//			throw new AuthorizationException("Acesso negado");
-//		}
+		UserSS user = UserService.authenticated();
+		if(user == null) {
+			throw new AuthorizationException("Acesso negado");
+		}
 		
-		List<String> listaDeposito = repoRecibos.findByDeposito(obj.getCODMENSAGEIRO(), obj.getDTFECHAMENTO());
+		//obj.setCODMENSAGEIRO(user.getId());
+		System.out.println("\n\t CODIGO DO MENSAGEIRO JÁ AUTENTICADO: "+ user.getId() + ", E DATA FECHAMENTO: " + obj.getDTFECHAMENTO());
+		
+		List<String> listaDeposito = repoRecibos.findByDeposito(user.getId(), obj.getDTFECHAMENTO());
 		
 		String var;
 		String[] vetLista = new String[2];
@@ -64,13 +67,16 @@ public class TnewdepositosService {
 			
 			depositoDTO.setQtdrecibos(Integer.parseInt(vetLista[0]));
 			depositoDTO.setValorDeposito(Double.parseDouble(vetLista[1]));
+			
+			System.out.println("\nTOTAL OBJ WEB (Back-end): " + obj.getTOTALARRECADADO() + "\nTotal ObjDTO BD (App): " + depositoDTO.getValorDeposito());
 		}
 		
 		if (obj.getTOTALARRECADADO().equals(depositoDTO.getValorDeposito())) {
 			Integer nrodeposito = findMax()+1;
 			obj.setNRODEPOSITO(nrodeposito);
 			obj.setQTDRECIBOS(depositoDTO.getQtdrecibos());
-//			obj.setEmail(user.getUsername());
+			//obj.setEmail(user.getUsername());
+			//obj.setCODMENSAGEIRO(user.getId());
 			
 			System.out.println("\nTOTAL OBJ WEB: " + obj.getTOTALARRECADADO() + "\nTotal ObjDTO BD: " + depositoDTO.getValorDeposito());
 			return repo.save(obj);
