@@ -7,7 +7,7 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.mcexpress.domain.Trecibos;
 
-public class TrecibosDTO5 implements Serializable{
+public class TrecibosDTO6 implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -44,7 +44,7 @@ public class TrecibosDTO5 implements Serializable{
 	private Integer naorecebido;
 	private Integer nrosorte;
 	private String statusrec;
-	//@JsonFormat(pattern = "dd/MM/yyyy")
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dtbaixa;
 	private String parcela;
 	private Integer via;
@@ -56,7 +56,7 @@ public class TrecibosDTO5 implements Serializable{
 	private Integer codmensageiro;
 	private Integer codcategoria;
 	private String reagendado;
-	//@JsonFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date dtreagendamento;
 	private Integer codcontrib;
 	private Integer codusuario;
@@ -71,10 +71,10 @@ public class TrecibosDTO5 implements Serializable{
 	private String observacoes;
 	
 	
-	public TrecibosDTO5() {
+	public TrecibosDTO6() {
 	}
 		
-	public TrecibosDTO5(Trecibos trecibo) {
+	public TrecibosDTO6(Trecibos trecibo) {
 		super();
 		
 		nrorecibo = trecibo.getNrorecibo();
@@ -105,8 +105,8 @@ public class TrecibosDTO5 implements Serializable{
 		dataqld = trecibo.getDataqld();
 		naorecebido = trecibo.getNaorecebido();
 		nrosorte = trecibo.getNrosorte();
-		//statusrec = trecibo.getStatusrec();
-		//dtbaixa = trecibo.getDtbaixa();
+		statusrec = trecibo.getStatusrec();
+		dtbaixa = trecibo.getDtbaixa();
 		parcela = trecibo.getParcela();
 		via = trecibo.getVia();
 		motivodevol = trecibo.getMotivodevol();
@@ -115,8 +115,8 @@ public class TrecibosDTO5 implements Serializable{
 		codoperador = trecibo.getCodoperador();
 		codmensageiro = trecibo.getCodmensageiro();
 		codcategoria = trecibo.getCodcategoria();
-		//dtreagendamento = trecibo.getDtreagendamento();
-		//reagendado = trecibo.getReagendado();
+		dtreagendamento = trecibo.getDtreagendamento();
+		reagendado = trecibo.getReagendado();
 		codcontrib = trecibo.getCodcontrib();
 		codusuario = trecibo.getCodusuario();
 		enderecosecundario = trecibo.getTconbribuintes().getENDERECOSECUNDARIO();

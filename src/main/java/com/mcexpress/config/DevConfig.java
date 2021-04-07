@@ -12,7 +12,7 @@ import com.mcexpress.services.EmailService;
 import com.mcexpress.services.SmtpEmailService;
 
 @Configuration
-@Profile("dev") // esse arquivo é de configuração somente de teste, então todos os Beans que estiver nesta classe serão somente para teste.
+@Profile("prod") // esse arquivo é de configuração somente de teste, então todos os Beans que estiver nesta classe serão somente para teste.
 public class DevConfig {
 	
 	//Instanciar a DBService

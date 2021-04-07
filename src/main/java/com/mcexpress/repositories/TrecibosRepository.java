@@ -176,12 +176,26 @@ public interface TrecibosRepository extends JpaRepository<Trecibos, Integer>  {
 	@Query("SELECT obj.statusrec, COUNT(obj.nrorecibo), SUM(obj.valorgerado) "
 			+ "FROM Trecibos obj "
 			+ "WHERE obj.codmensageiro =:cod "
-			+ "AND obj.statusrec IN ('B','C','D','G') "
+			+ "AND obj.statusrec IN ('B','C','D') "
 			+ "AND obj.tconbribuintes.CIDADESECUNDARIO != '' "
 			+ "AND obj.tconbribuintes.CIDADESECUNDARIO != 'SEM CADASTRO' "
-			+ "AND obj.dtcobranca BETWEEN :startDate AND :endDate "
+			+ "AND obj.dtbaixa BETWEEN :startDate AND :endDate "
+			//+ "AND obj.dtcobranca BETWEEN :startDate AND :endDate "
 			+ "GROUP BY obj.statusrec ")
 		List<String> ResumoRecibosMensageiroData( 
+			@Param("cod") Integer cod,
+			@Param("startDate") Date startDate,
+			@Param("endDate") Date endDate);
+	
+	//==================================Resumo por id do mensageiro entre datas (Recibos em aberto)========================================
+	@Transactional(readOnly = true)
+	@Query("SELECT obj.statusrec, COUNT(obj.nrorecibo), SUM(obj.valorgerado) "
+			+ "FROM Trecibos obj "
+			+ "WHERE obj.codmensageiro =:cod "
+			+ "AND obj.statusrec = 'G' "
+			+ "AND obj.dtcobranca BETWEEN :startDate AND :endDate "
+			+ "GROUP BY obj.statusrec ")
+		List<String> ResumoRecibosEmAbertoData( 
 			@Param("cod") Integer cod,
 			@Param("startDate") Date startDate,
 			@Param("endDate") Date endDate);

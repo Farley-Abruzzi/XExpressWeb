@@ -68,7 +68,7 @@ public class TnewdepositosService {
 			depositoDTO.setQtdrecibos(Integer.parseInt(vetLista[0]));
 			depositoDTO.setValorDeposito(Double.parseDouble(vetLista[1]));
 			
-			System.out.println("\nTOTAL OBJ WEB (Back-end): " + obj.getTOTALARRECADADO() + "\nTotal ObjDTO BD (App): " + depositoDTO.getValorDeposito());
+			System.out.println("\nTOTAL OBJ WEB (Back-end): " + depositoDTO.getValorDeposito() + "\nTotal OBJ APP (App): " + obj.getTOTALARRECADADO());
 		}
 		
 		if (obj.getTOTALARRECADADO().equals(depositoDTO.getValorDeposito())) {
@@ -78,7 +78,7 @@ public class TnewdepositosService {
 			//obj.setEmail(user.getUsername());
 			//obj.setCODMENSAGEIRO(user.getId());
 			
-			System.out.println("\nTOTAL OBJ WEB: " + obj.getTOTALARRECADADO() + "\nTotal ObjDTO BD: " + depositoDTO.getValorDeposito());
+			System.out.println("\nTOTAL OBJ WEB (Back-end): " + depositoDTO.getValorDeposito() + "\nTotal OBJ APP (App): " + obj.getTOTALARRECADADO());
 			return repo.save(obj);
 		} else {
 			System.out.println("\nVALOR DE DEPOSITO INCORRETO: "+ obj.getTOTALARRECADADO());
@@ -94,9 +94,9 @@ public class TnewdepositosService {
 		
 		URI uri = s3Service.uploadFile(multipartFile);
 		
-		Tnewdepositos obj = repo.findByEmail(user.getUsername());
-		obj.setIMAGEURL(uri.toString());
-		repo.save(obj);
+//		Tnewdepositos obj = repo.findId(user.getId());
+//		obj.setIMAGEURL(uri.toString());
+//		repo.save(obj);
 		
 		return uri;
 	}

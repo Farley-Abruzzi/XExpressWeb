@@ -8,7 +8,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -68,7 +67,7 @@ public class TrecdevolvidoswebResource {
 
 	
 	//========================Devolver recibos web=================
-	@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR')")
+	//@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR')")
 	@CrossOrigin
 	@RequestMapping(method = RequestMethod.POST) //A anotação @Valid indica que o metodo irá usar o BeanValidation na Trecibos DTO
 	public ResponseEntity<Void> insert(@Valid @RequestBody Trecdevolvidosweb obj){ //Para o objeto ser construido a partir dos dados JSON que eu enviar é preciso a anotação antes da variável @RequestBody 

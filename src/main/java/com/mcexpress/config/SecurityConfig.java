@@ -23,6 +23,7 @@ import com.mcexpress.security.JWTAuthenticationFilter;
 import com.mcexpress.security.JWTAuthorizationFilter;
 import com.mcexpress.security.JWTUtil;
 
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -37,12 +38,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private JWTUtil jwtUtil;
 	
-	private static final String[] PUBLIC_MATCHERS = { "/h2-console/**", "/login/**", "/auth/forgot**", "/recibos/**" };
+	private static final String[] PUBLIC_MATCHERS = { "/h2-console/**", "/login/**", "/auth/forgot**"};
 	
-	private static final String[] PUBLIC_MATCHERS_GET = { "/contribuintes/**", "/feriado/**", "/devolvido/**",
-			"/funcionarios/**", "/historicorecibo/**"};
+	private static final String[] PUBLIC_MATCHERS_GET = { "/contribuintes/**", "/feriado/**", "/devolvido/**", "/funcionarios/**", "/historicorecibo/**", "/recibos/**"};
 	
-	private static final String[] PUBLIC_MATCHERS_POST = { "/login/**", "/usuario/**", "/deposito/**", "/deposito/picture", "/devolvido/**", "/recibos/**"};
+	private static final String[] PUBLIC_MATCHERS_POST = { "/login/**", "/usuario/**", "/deposito/**", "/deposito/picture", "/devolvido/**"};
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {

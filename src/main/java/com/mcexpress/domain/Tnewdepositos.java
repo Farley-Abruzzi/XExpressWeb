@@ -60,6 +60,7 @@ public class Tnewdepositos implements Serializable {
 		DESCRICAODESPESA = dESCRICAODESPESA;
 		IMAGEURL = iMAGEURL;
 		this.email = email;
+
 	}
 
 	public Integer getNRODEPOSITO() {

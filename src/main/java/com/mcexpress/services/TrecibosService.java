@@ -191,11 +191,12 @@ public class TrecibosService {
 	public TresumoRecibosDTO ResumoRecibosMensageiroData(Integer cod, Date startDate, Date endDate) {
 
 		List<String> listRecibos = repo.ResumoRecibosMensageiroData(cod, startDate, endDate);
+		List<String> listRecibosEmAberto = repo.ResumoRecibosEmAbertoData(cod, startDate, endDate);
 
 		TresumoRecibosDTO resumo = new TresumoRecibosDTO();
 		String nomeDoMensageiro = repoFunc.getOne(cod).getNOME();
 
-		resumo.resumoDtoString(listRecibos, nomeDoMensageiro);
+		resumo.resumoDtoString(listRecibos, listRecibosEmAberto, nomeDoMensageiro);
 
 		return resumo;
 

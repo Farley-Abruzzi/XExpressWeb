@@ -27,6 +27,7 @@ import com.mcexpress.dto.TrecibosDTO;
 import com.mcexpress.dto.TrecibosDTO3;
 import com.mcexpress.dto.TrecibosDTO4;
 import com.mcexpress.dto.TrecibosDTO5;
+import com.mcexpress.dto.TrecibosDTO6;
 import com.mcexpress.dto.TrecibosPorMensageiroDTO;
 import com.mcexpress.dto.TrecibosReimpressosDTO;
 import com.mcexpress.dto.TrecibosRelatorioDiarioDTO;
@@ -153,14 +154,14 @@ public class TrecibosResource {
 	//@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'MENSAGEIRO', 'OPERADORA')")
 	@CrossOrigin
 	@RequestMapping(value = "/listarecibosapp", method = RequestMethod.GET)
-	public ResponseEntity<List<TrecibosDTO5>> findRecibosApp(
+	public ResponseEntity<List<TrecibosDTO6>> findRecibosApp(
 			@RequestParam(value = "cod", defaultValue = "6") Integer cod,
 			@RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
 			@RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
 			@RequestParam(value = "bairro", defaultValue = "") String bairro) {
 
 		List<Trecibos> list = service.findRecibosApp(cod, startDate, endDate, bairro);
-		List<TrecibosDTO5> listDto = list.stream().map(obj -> new TrecibosDTO5(obj)).collect(Collectors.toList());
+		List<TrecibosDTO6> listDto = list.stream().map(obj -> new TrecibosDTO6(obj)).collect(Collectors.toList());
 
 		return ResponseEntity.ok().body(listDto);
 		// http://192.168.0.243:8081/recibos/listarecibosapp?cod=315&startDate=2019-07-01&endDate=2019-07-31
@@ -412,6 +413,7 @@ public class TrecibosResource {
 
 		Trecibos objRec = service.find(id);
 		Trecibos obj = service.updateData(objDto, objRec);
+		System.out.println("\n\tDTREAGENDAMENTO: "+ objDto.getDtreagendamento());
 		// Para garantir que a categoria a ser atualizada é realmente a que foi passada
 		// como parâmetro
 		obj = service.update(obj);

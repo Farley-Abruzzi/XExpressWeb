@@ -53,6 +53,7 @@ public class TresumoRecibosDTO implements Serializable {
 		this.totalQtd = totalQtd;
 		this.totalValorGerado = totalValorGerado;
 		this.mensageiro = mensageiro;
+		
 	}
 
 	public Integer getQtdRecebido() {
@@ -167,7 +168,7 @@ public class TresumoRecibosDTO implements Serializable {
 		this.mensageiro = mensageiro;
 	}
 
-	public void resumoDtoString(List<String> listString, String nomeMensageiro) {
+	public void resumoDtoString(List<String> listString, List<String> listRecibosEmAberto, String nomeMensageiro) {
 
 		// B = Recebido
 		Integer qtdRecebido = 0;
@@ -183,6 +184,7 @@ public class TresumoRecibosDTO implements Serializable {
 		Integer qtdCancelado = 0;
 		Double valorCancelado = 0.0;
 		Double percentualCancelado = 0.0;
+		
 		// G = Gerado
 		Integer qtdEmAberto = 0;
 		Double valorEmAberto = 0.0;
@@ -218,12 +220,6 @@ public class TresumoRecibosDTO implements Serializable {
 				valorCancelado += Double.parseDouble(vetLista[2]);
 
 				break;
-			case "G": // Em aberto se impresso,
-
-				qtdEmAberto += Integer.parseInt(vetLista[1]);
-				valorEmAberto += Double.parseDouble(vetLista[2]);
-
-				break;
 			default:
 				break;
 			}
@@ -231,7 +227,7 @@ public class TresumoRecibosDTO implements Serializable {
 			totalQtd += Integer.parseInt(vetLista[1]);
 			totalValorGerado += Double.parseDouble(vetLista[2]);
 		}
-
+		
 		percentualRecebido = (double) qtdRecebido / totalQtd;
 		percentualRecebido = percentualRecebido.isNaN() ? 0.0 : percentualRecebido * 100;
 
@@ -240,6 +236,19 @@ public class TresumoRecibosDTO implements Serializable {
 
 		percentualCancelado = (double) qtdCancelado / totalQtd;
 		percentualCancelado = percentualCancelado.isNaN() ? 0.0 : percentualCancelado * 100;
+		
+		
+		String ver;
+		String[] vetorLista = new String[2];
+		for (int i = 0; i < listRecibosEmAberto.size(); i++) {
+			
+			ver = listRecibosEmAberto.get(i);
+			vetorLista = ver.split(",");
+			
+			qtdEmAberto = Integer.parseInt(vetorLista[1]);
+			valorEmAberto = Double.parseDouble(vetorLista[2]);
+			
+		}
 
 		setQtdRecebido(qtdRecebido);
 		setValorRecebido(valorRecebido);
@@ -257,4 +266,6 @@ public class TresumoRecibosDTO implements Serializable {
 		setMensageiro(nomeMensageiro);
 
 	}
+
+	
 }
