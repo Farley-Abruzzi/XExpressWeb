@@ -20,6 +20,7 @@ import com.mcexpress.dto.TrecibosDTO5;
 import com.mcexpress.dto.TrecibosRelatorioDiarioDTO;
 //import com.mcexpress.dto.TrecibosPorMensageiroDTO;
 import com.mcexpress.dto.TrecibosReprocessarDTO;
+import com.mcexpress.dto.TresumoRecibosBaixadosDTO;
 import com.mcexpress.dto.TresumoRecibosDTO;
 import com.mcexpress.repositories.TfuncionariosRepository;
 import com.mcexpress.repositories.TrecibosRepository;
@@ -92,6 +93,32 @@ public class TrecibosService {
 		List<Trecibos> list = repo.findRecibosApp(cod, startDate, endDate, bairro);
 		return list;
 	}
+	
+	public List<TresumoRecibosBaixadosDTO> findRecibosBaixadosApp(Integer cod, Date startDate, Date endDate) {
+		
+		List<String> listRecibosBaixados = repo.findRecibosBaixadosApp(cod, startDate, endDate);
+
+		String var;
+		String[] vetLista = new String[2];
+
+		List<TresumoRecibosBaixadosDTO>  listaResumoBaixados = new ArrayList<>();
+
+		for (int i = 0; i < listRecibosBaixados.size(); i++) {
+
+			TresumoRecibosBaixadosDTO resumoBaixados = new TresumoRecibosBaixadosDTO();
+
+			var = listRecibosBaixados.get(i);
+			vetLista = var.split(",");
+
+			resumoBaixados.setNrorecibo(Integer.parseInt(vetLista[0]));
+			resumoBaixados.setValorgerado(Double.parseDouble(vetLista[1]));
+
+			listaResumoBaixados.add(resumoBaixados);
+		}
+
+		return listaResumoBaixados;
+	}
+	
 	
 	// ==================================Recibos por mensageiro *** Lista recibos Web
 	public List<Trecibos> findRecibosPorMensageiro(Integer cod, String status, Date startDate, Date endDate) {
@@ -192,6 +219,8 @@ public class TrecibosService {
 
 		List<String> listRecibos = repo.ResumoRecibosMensageiroData(cod, startDate, endDate);
 		List<String> listRecibosEmAberto = repo.ResumoRecibosEmAbertoData(cod, startDate, endDate);
+		
+		
 
 		TresumoRecibosDTO resumo = new TresumoRecibosDTO();
 		String nomeDoMensageiro = repoFunc.getOne(cod).getNOME();

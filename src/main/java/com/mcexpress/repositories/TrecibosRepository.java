@@ -56,25 +56,25 @@ public interface TrecibosRepository extends JpaRepository<Trecibos, Integer>  {
 			@Param("endDate") Date endDate,
 			Pageable pageRequest);
 	
-	//================================== Recibos por id do mensageiro entre datas (Em abertdo) =================
-		@Transactional(readOnly = true)
-		@Query("SELECT obj FROM Trecibos obj "
-				+ "WHERE obj.codmensageiro =:cod "
-				+ "AND obj.statusrec = 'G' "
-				+ "AND obj.dtcobranca BETWEEN :startDate AND :endDate ")
-			Page<Trecibos> findRecibosAbertos( 
-			@Param("cod") Integer cod,
-			@Param("startDate") Date startDate,
-			@Param("endDate") Date endDate,
-			Pageable pageRequest);
-	
-
-	//================================== Recibos por id do mensageiro entre datas tabela do app mobile =================
+	//================================== Recibos por id do mensageiro entre datas (Em aberto) =================
 	@Transactional(readOnly = true)
 	@Query("SELECT obj FROM Trecibos obj "
 			+ "WHERE obj.codmensageiro =:cod "
 			+ "AND obj.statusrec = 'G' "
-			+ "AND obj.entregaweb IS NULL "
+			+ "AND obj.dtcobranca BETWEEN :startDate AND :endDate ")
+		Page<Trecibos> findRecibosAbertos( 
+		@Param("cod") Integer cod,
+		@Param("startDate") Date startDate,
+		@Param("endDate") Date endDate,
+		Pageable pageRequest);
+	
+
+	//================================== Recibos por id do mensageiro entre datas para tabela do app mobile =================
+	@Transactional(readOnly = true)
+	@Query("SELECT obj FROM Trecibos obj "
+			+ "WHERE obj.codmensageiro =:cod "
+			+ "AND obj.statusrec = 'G' "
+			+ "AND obj.entregaweb = 'S' "
 			+ "AND obj.dtcobranca BETWEEN :startDate AND :endDate "
 			+ "AND obj.tconbribuintes.BAIRROPRINCIPAL =:bairro ")
 		List<Trecibos> findRecibosApp( 
@@ -196,6 +196,18 @@ public interface TrecibosRepository extends JpaRepository<Trecibos, Integer>  {
 			+ "AND obj.dtcobranca BETWEEN :startDate AND :endDate "
 			+ "GROUP BY obj.statusrec ")
 		List<String> ResumoRecibosEmAbertoData( 
+			@Param("cod") Integer cod,
+			@Param("startDate") Date startDate,
+			@Param("endDate") Date endDate);
+	
+	@Transactional(readOnly = true)
+	@Query("SELECT obj.nrorecibo, obj.valorgerado "
+			+ "FROM Trecibos obj "
+			+ "WHERE obj.codmensageiro =:cod "
+			+ "AND obj.statusrec = 'B' "
+			+ "AND obj.dtbaixa BETWEEN :startDate AND :endDate "
+			+ "ORDER BY obj.dtbaixa ")
+		List<String> findRecibosBaixadosApp(
 			@Param("cod") Integer cod,
 			@Param("startDate") Date startDate,
 			@Param("endDate") Date endDate);

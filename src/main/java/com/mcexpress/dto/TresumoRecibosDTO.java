@@ -30,6 +30,7 @@ public class TresumoRecibosDTO implements Serializable {
 	// Total de todos
 	public Integer totalQtd;
 	public Double totalValorGerado;
+	
 
 	public TresumoRecibosDTO() {
 	}
@@ -107,6 +108,7 @@ public class TresumoRecibosDTO implements Serializable {
 	public Double getTotalValorGerado() {
 		return totalValorGerado;
 	}
+	
 
 	public void setQtdRecebido(Integer qtdRecebido) {
 		this.qtdRecebido = qtdRecebido;
@@ -167,6 +169,7 @@ public class TresumoRecibosDTO implements Serializable {
 	public void setMensageiro(String mensageiro) {
 		this.mensageiro = mensageiro;
 	}
+	
 
 	public void resumoDtoString(List<String> listString, List<String> listRecibosEmAberto, String nomeMensageiro) {
 
@@ -192,6 +195,7 @@ public class TresumoRecibosDTO implements Serializable {
 		// Total de todos
 		Integer totalQtd = 0;
 		Double totalValorGerado = 0.0;
+
 
 		String var;
 		String[] vetLista = new String[4];
@@ -249,6 +253,7 @@ public class TresumoRecibosDTO implements Serializable {
 			valorEmAberto = Double.parseDouble(vetorLista[2]);
 			
 		}
+		
 
 		setQtdRecebido(qtdRecebido);
 		setValorRecebido(valorRecebido);
@@ -264,6 +269,7 @@ public class TresumoRecibosDTO implements Serializable {
 		setQtdEmAberto(qtdEmAberto);
 		setValorEmAberto(valorEmAberto);
 		setMensageiro(nomeMensageiro);
+		
 
 	}
 

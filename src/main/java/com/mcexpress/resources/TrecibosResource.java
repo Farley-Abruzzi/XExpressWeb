@@ -32,6 +32,7 @@ import com.mcexpress.dto.TrecibosPorMensageiroDTO;
 import com.mcexpress.dto.TrecibosReimpressosDTO;
 import com.mcexpress.dto.TrecibosRelatorioDiarioDTO;
 import com.mcexpress.dto.TrecibosReprocessarDTO;
+import com.mcexpress.dto.TresumoRecibosBaixadosDTO;
 import com.mcexpress.dto.TresumoRecibosDTO;
 import com.mcexpress.resources.utils.URL;
 import com.mcexpress.services.TfuncionariosService;
@@ -167,17 +168,6 @@ public class TrecibosResource {
 		// http://192.168.0.243:8081/recibos/listarecibosapp?cod=315&startDate=2019-07-01&endDate=2019-07-31
 	}
 	
-	//@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'MENSAGEIRO')")
-//	@CrossOrigin
-//	@RequestMapping(method = RequestMethod.GET)
-//	public ResponseEntity<List<Trecibos>> findRecibosApp() {
-//
-//		List<Trecibos> list = service.findByFuncionario();
-//
-//		return ResponseEntity.ok().body(list);
-//		// http://192.168.0.243:8081/recibos
-//	}
-	
 	// =======Recibos por id do mensageiro entre datas e seleção do status - Lista Recibos por mensageiro WEB ==================
 	//@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'OPERADORA')")
 	@CrossOrigin
@@ -194,7 +184,6 @@ public class TrecibosResource {
 		
 		return ResponseEntity.ok().body(listDto);
 		// http://192.168.0.243:8081/recibos/listarecibosweb?cod=315&status=G&startDate=2019-07-01&endDate=2019-07-31
-		
 	}
 	
 	// ========Recibos reimpressos entre datas *** ==============================================
@@ -258,9 +247,7 @@ public class TrecibosResource {
 		List<TrecebidoMensageiroDTO> list = service.findRecebidoMensageiro(startDate, endDate);
 		
 		return ResponseEntity.ok().body(list);
-		
 		// http://localhost:8081/recibos/recebidomensageiro?&startDate=2019-07-01&endDate=2019-07-31
-		
 	}
 	
 
@@ -275,7 +262,6 @@ public class TrecibosResource {
 		List<TrecibosReprocessarDTO> resumo = service.findRecibosReprocesssar(startDate, endDate);
 
 		return ResponseEntity.ok().body(resumo);
-
 		// http://localhost:8081/recibos/recibosreprocessar?startDate=2019-07-01&endDate=2019-07-31
 	}
 
@@ -295,8 +281,21 @@ public class TrecibosResource {
 		System.out.println("\n\nResumo: " + s + "\n\n");
 
 		return ResponseEntity.ok().body(resumo);
-
 		// http://localhost:8081/recibos/resumomensageiro?cod=11&startDate=2018-01-01&endDate=2018-02-01
+	}
+	
+	// ================ Resumo por id do mensageiro entre datas dos recibos baixados =========================
+	@CrossOrigin
+	@RequestMapping(value = "/resumorecibosbaixadosapp", method = RequestMethod.GET)
+	public ResponseEntity<List<TresumoRecibosBaixadosDTO>> findRecibosBaixadosApp(
+			@RequestParam(value = "cod", defaultValue = "6") Integer cod,
+			@RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+			@RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
+
+		List<TresumoRecibosBaixadosDTO> resumoBaixados = service.findRecibosBaixadosApp(cod, startDate, endDate);
+
+		return ResponseEntity.ok().body(resumoBaixados);
+		// http://192.168.0.243:8081/recibos/listarecibosapp?cod=315&startDate=2019-07-01&endDate=2019-07-31
 	}
 	
 	//@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'OPERADORA')")
@@ -311,12 +310,11 @@ public class TrecibosResource {
 
 		
 		return ResponseEntity.ok().body(relatorio);
-		
 		// http://localhost:8081/recibos/relatoriodiario?&cod=11&mes=06&ano=2019
 	}
 	
 
-	// ======== Resumo do mensageiro por cidade ==========================
+	// ======== Resumo do mensageiro por cidade ====================================
 	//@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'OPERADORA')")
 	@CrossOrigin
 	@RequestMapping(value = "/mensageiroporcidade", method = RequestMethod.GET)
@@ -328,7 +326,6 @@ public class TrecibosResource {
 		List<TrecibosDTO3> resumo = service.recibosMensageiroPorCidade(cod, startDate, endDate);
 
 		return ResponseEntity.ok().body(resumo);
-
 		// http://localhost:8081/recibos/mensageiroporcidade?&cod=11&startDate=2018-01-01&endDate=2018-02-01
 	}
 
@@ -373,7 +370,7 @@ public class TrecibosResource {
 		// http://localhost:8081/recibos/recibocontribuinte?&cod=303&startDate=2018-01-01&endDate=2018-12-01
 	}
 
-	// =================Recibos por id do contribuinte ativo TOP 25 ===
+	// ================= Recibos por id do contribuinte ativo TOP 25 =====================
 	//@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'OPERADORA')")
 	@CrossOrigin
 	@RequestMapping(value = "/reciboscontrib", method = RequestMethod.GET)
@@ -405,8 +402,7 @@ public class TrecibosResource {
 		// http://localhost:8081/recibos/reciboscontrib?cod=303
 	}
 
-	// Recebe o objeto dto5 do xexpress mobile e atualiza as ações do mensageiro no
-	// recibo.
+	// Recebe o objeto dto5 do xexpress mobile e atualiza as ações do mensageiro no recibo.
 	@CrossOrigin
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@RequestBody TrecibosDTO5 objDto, @PathVariable Integer id) {
@@ -414,13 +410,45 @@ public class TrecibosResource {
 		Trecibos objRec = service.find(id);
 		Trecibos obj = service.updateData(objDto, objRec);
 		System.out.println("\n\tDTREAGENDAMENTO: "+ objDto.getDtreagendamento());
-		// Para garantir que a categoria a ser atualizada é realmente a que foi passada
-		// como parâmetro
+		// Para garantir que a categoria a ser atualizada é realmente a que foi passada como parâmetro
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
+		// http://localhost:8081/recibos/2400055
 	}
-	// http://localhost:8081/recibos/2400055
 
+	@RequestMapping(value = "/page", method = RequestMethod.GET)
+	// vou concategar um /page para diferenciar do categorias ex:
+	// http://localhost:8081/categorias/page
+	public ResponseEntity<Page<Trecibos>> findPage(@RequestParam(value = "page", defaultValue = "6") Integer page,
+			@RequestParam(value = "linesPerPage", defaultValue = "25") Integer linesPerPage,
+			@RequestParam(value = "orderBy", defaultValue = "IMPRESSO") String orderBy,
+			@RequestParam(value = "direction", defaultValue = "ASC") String direction) {
+
+		Page<Trecibos> list = service.findPage(page, linesPerPage, orderBy, direction);
+
+		return ResponseEntity.ok().body(list);
+		// exemplo URL:
+		// http://localhost:8081/recibos/page?linesPerPage=3&page=1&direction=ASC&orderBy=IMPRESSO
+		// Consulta lista de recibos
+	}
+	
+	//======================== Inserir novo recibo =================
+	//@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'MENSAGEIRO')")
+	@CrossOrigin
+	@RequestMapping(method = RequestMethod.POST) //A anotação @Valid indica que o metodo irá usar o BeanValidation na Trecibos DTO
+	public ResponseEntity<Void> insert(@RequestBody Trecibos obj) { //Para o objeto ser construido a partir dos dados JSON que eu enviar é preciso a anotação antes da variável @RequestBody
+		
+		obj = service.insert(obj);
+		
+		//O HTTP quando estou inserindo um novo recurso há um codigo de resposta particular, o codigo adequado é 201 Created
+		//Vamos usar a chave da categoria para inserir a URL HTTP
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/id").buildAndExpand(obj.getNrorecibo()).toUri();
+		// o fromCurrentRequest pega o URL base ex: "http://localhost:8081/feriado" e o buildAndExpand() o id do objeto Inserido.
+		
+		return ResponseEntity.created(uri).build();
+		// http://localhost:8081/recibos
+	}
+	
 	/*
 	 * @RequestMapping(method = RequestMethod.POST) //A anotação @Valid indica que o
 	 * metodo irá usar o BeanValidation na Trecibos DTO public ResponseEntity<Void>
@@ -461,39 +489,5 @@ public class TrecibosResource {
 	 * 
 	 * return ResponseEntity.ok().body(listDTO); }
 	 */
-	@RequestMapping(value = "/page", method = RequestMethod.GET)
-	// vou concategar um /page para diferenciar do categorias ex:
-	// http://localhost:8081/categorias/page
-	public ResponseEntity<Page<Trecibos>> findPage(@RequestParam(value = "page", defaultValue = "6") Integer page,
-			@RequestParam(value = "linesPerPage", defaultValue = "25") Integer linesPerPage,
-			@RequestParam(value = "orderBy", defaultValue = "IMPRESSO") String orderBy,
-			@RequestParam(value = "direction", defaultValue = "ASC") String direction) {
-
-		Page<Trecibos> list = service.findPage(page, linesPerPage, orderBy, direction);
-
-		return ResponseEntity.ok().body(list);
-		// exemplo URL:
-		// http://localhost:8081/recibos/page?linesPerPage=3&page=1&direction=ASC&orderBy=IMPRESSO
-		// Consulta lista de recibos
-		
-
-	}
-	
-	//======================== Inserir novo recibo =================
-	//@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR', 'MENSAGEIRO')")
-	@CrossOrigin
-	@RequestMapping(method = RequestMethod.POST) //A anotação @Valid indica que o metodo irá usar o BeanValidation na Trecibos DTO
-	public ResponseEntity<Void> insert(@RequestBody Trecibos obj) { //Para o objeto ser construido a partir dos dados JSON que eu enviar é preciso a anotação antes da variável @RequestBody
-		
-		obj = service.insert(obj);
-		
-		//O HTTP quando estou inserindo um novo recurso há um codigo de resposta particular, o codigo adequado é 201 Created
-		//Vamos usar a chave da categoria para inserir a URL HTTP
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/id").buildAndExpand(obj.getNrorecibo()).toUri();
-		// o fromCurrentRequest pega o URL base ex: "http://localhost:8081/feriado" e o buildAndExpand() o id do objeto Inserido.
-		
-		return ResponseEntity.created(uri).build();
-		// http://localhost:8081/recibos
-	}
 
 }
