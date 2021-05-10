@@ -94,6 +94,7 @@ public class TrecibosService {
 		return list;
 	}
 	
+	
 	public List<TresumoRecibosBaixadosDTO> findRecibosBaixadosApp(Integer cod, Date startDate, Date endDate) {
 		
 		List<String> listRecibosBaixados = repo.findRecibosBaixadosApp(cod, startDate, endDate);
@@ -416,6 +417,12 @@ public class TrecibosService {
 		return repo.buscarRecibosContrib(cod, dtAtual, pageRequest);
 
 	}
+	
+	public Integer findMax(Integer cod, Date dtOp) {
+		Integer obj = repo.findMax(cod, dtOp);
+		return obj;
+		// tipo do objeto que trouxe essa exceção
+	}
 
 	public Trecibos insert(Trecibos obj) {
 		obj.setNrorecibo(null);
@@ -477,5 +484,6 @@ public class TrecibosService {
 		return obj;
 		
 	}
+
 
 }

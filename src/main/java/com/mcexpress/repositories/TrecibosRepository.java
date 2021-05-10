@@ -68,8 +68,14 @@ public interface TrecibosRepository extends JpaRepository<Trecibos, Integer>  {
 		@Param("endDate") Date endDate,
 		Pageable pageRequest);
 	
-
-	//================================== Recibos por id do mensageiro entre datas para tabela do app mobile =================
+	@Transactional(readOnly = true)
+	@Query("SELECT MAX(obj.nrorecibo) FROM Trecibos obj "
+		 + "WHERE obj.codmensageiro =:cod "
+		 + "AND obj.dtoperacao =:dtOp")
+			Integer findMax(
+			@Param("cod") Integer cod,
+			@Param("dtOp") Date dtOp);
+	
 	@Transactional(readOnly = true)
 	@Query("SELECT obj FROM Trecibos obj "
 			+ "WHERE obj.codmensageiro =:cod "
@@ -83,13 +89,6 @@ public interface TrecibosRepository extends JpaRepository<Trecibos, Integer>  {
 			@Param("endDate") Date endDate,
 			@Param("bairro") String bairro);
 	
-	//Restrição de conteúdo: mensageiro só recupera seu recibos
-//	@Transactional(readOnly = true)
-//	@Query("SELECT obj FROM Trecibos obj "
-//			+ "WHERE obj.statusrec = 'G' "
-//			+ "AND obj.entregaweb IS NULL "
-//			+ "AND obj.dtcobranca BETWEEN :startDate AND :endDate ")
-//	List<Trecibos> findByTfuncionarios(Tfuncionarios funcionario);
 	
 	
 	//==================================Lista Recibos por mensageiro Web ***
@@ -258,8 +257,6 @@ public interface TrecibosRepository extends JpaRepository<Trecibos, Integer>  {
 		List<String> findByDeposito(
 				@Param("cod") Integer cod,
 				@Param("dtFech") Date dtFech);
-	
-			
 	
 	
 	//Sql nativo @Query(value = "select * from pergunta where ativo = 1", nativeQuery = true)

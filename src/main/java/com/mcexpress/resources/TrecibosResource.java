@@ -250,6 +250,32 @@ public class TrecibosResource {
 		// http://localhost:8081/recibos/recebidomensageiro?&startDate=2019-07-01&endDate=2019-07-31
 	}
 	
+	@CrossOrigin
+	@RequestMapping(value = "/ultrecibo", method = RequestMethod.GET)
+	public ResponseEntity<TrecibosDTO6> findUltRecibo(
+			@RequestParam(value = "cod", defaultValue = "6") Integer cod,
+			@RequestParam("dtOp") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dtOp) {
+		
+		Integer idObj = service.findMax(cod, dtOp);
+		Trecibos obj = service.find(idObj);
+		System.out.println("idOBJ: "+ idObj);
+		TrecibosDTO6 objDTO = new TrecibosDTO6(obj);
+		
+		return ResponseEntity.ok().body(objDTO);
+		// http://localhost:8081/recibos/ultrecibo
+	}
+	
+//	@CrossOrigin //Anotação de Cors Cross-Origin Resource Sharing (CORS)
+//	@RequestMapping(value="/ultcontrib", method=RequestMethod.GET)
+//	public ResponseEntity<TcontribuintesDTO2> ultContribInserido() {
+//		
+//		Integer idObj = service.findMax();
+//		Tcontribuintes obj = service.findByCodcontrib(idObj);
+//		TcontribuintesDTO2 objDTO2 = new TcontribuintesDTO2(obj);
+//		
+//		return ResponseEntity.ok().body(objDTO2);
+//	}
+	
 
 	// ===== Lista de recibos entre datas a reprocessar =================
 	//@PreAuthorize("hasAnyRole('ADMIN', 'SUPERVISOR')")
